@@ -4,9 +4,18 @@ Sealed at origin. Opened at destination. Not in between.
 
 A private LLM API: one attested endpoint on top of attested GPUs, OpenAI and Anthropic compatible. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
 
-[I'm a human](#buy) [I'm an agent](/agents.md) Freight Prepaid USDC · No account Got an agent? Hand it this:
+- [I'm a human](#three-steps-then-it-runs)
+- [I'm an agent](/agents.md)
 
-## `Read https://sealedin.ai/agents.md and set up SealedIn as the model endpoint.` Three steps. Then it runs.
+Freight prepaid: USDC, no account.
+
+Got an agent? Hand it this:
+
+```text
+Read https://sealedin.ai/agents.md and set up SealedIn as the model endpoint.
+```
+
+## Three steps. Then it runs.
 
 ### 01 Pay
 
@@ -20,15 +29,13 @@ Save the code shown with the payment. The key appears on this page once the paym
 
 ### 03 Run
 
-Claude Code
+Claude Code:
 
-```
-
+```bash
 export ANTHROPIC_BASE_URL=https://api.sealedin.ai
 export ANTHROPIC_AUTH_TOKEN=$SEALEDIN_KEY
 export ANTHROPIC_MODEL=chutes/zai-org/GLM-5.2-TEE
 claude
-
 ```
 
 ## Not to be opened in transit.

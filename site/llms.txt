@@ -1,8 +1,9 @@
 # SealedIn
 
-> An attested API endpoint on top of attested GPUs: open-weight models, requests encrypted all the way and opened only inside sealed hardware (Intel TDX gateway, GPU enclaves). OpenAI and Anthropic compatible. Keys are bought with USDC on Solana over x402.
+> A private LLM API: one attested endpoint on top of attested GPUs, with open-weight models, requests encrypted all the way and opened only inside sealed hardware (Intel TDX gateway, GPU enclaves). OpenAI and Anthropic compatible. Keys are bought with USDC on Solana over x402.
 
 ## Start
+- [Home](https://sealedin.ai/index.md)
 - [For agents](https://sealedin.ai/agents.md): endpoints, buying a key, models, rules
 - [Models and prices](https://sealedin.ai/models.md)
 

@@ -35,6 +35,6 @@ claude
 
 Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.
 
-We see metadata for billing: key, model, token counts, size and timing. Physical attacks on the hardware are out of scope.
+We see spend per key, not your requests. Physical attacks on the hardware are out of scope.
 
 [What is verified, and what is not](/trust.md)

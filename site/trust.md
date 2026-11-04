@@ -2,11 +2,13 @@
 
 ## What we can see
 
-Metadata: key, model, token counts, request size and timing. Billing needs it. In normal operation we have no software path to the content of your prompts.
+Spend and balance per key. That is what billing needs from us. Model, token counts and timing are recorded inside the enclave and no route exposes them, per request or per prompt. Our hosting provider sees your IP address and the size and timing of encrypted traffic. Payments are public on Solana.
 
 ## What is verified
 
 An enclave is sealed hardware that can prove what code it runs. The terms below use that word.
+
+- The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
 
 - TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.
 
@@ -16,9 +18,7 @@ An enclave is sealed hardware that can prove what code it runs. The terms below 
 
 - Prices come from a catalog signed by the enclave.
 
-## What is not verified yet
-
-- The source is not public yet, so a stranger cannot reproduce the measurement. That is the next release.
+## What cannot be verified
 
 - The check of the upstream cannot prove which weights ran, or what the upstream did with the prompt.
 

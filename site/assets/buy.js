@@ -16,6 +16,7 @@
   // Held in memory only, for a top-up, and sent only to claim.
   let bearer = null;
   let session = null;
+  let qrLibrary = null;
 
   // Base58
 
@@ -244,6 +245,20 @@
     return el('div', { className: 'buy-block' }, el('div', { className: 'buy-bar' }, el('span', {}, label), copy), el('pre', {}, text));
   }
 
+  /** Loads the QR generator when a payment needs it; resolves to false if it cannot load. */
+  function loadQrLibrary() {
+    qrLibrary ??= new Promise((resolve) => {
+      const script = el('script', { src: '/assets/qrcode.js' });
+      script.addEventListener('load', () => resolve(true));
+      script.addEventListener('error', () => {
+        qrLibrary = null;
+        resolve(false);
+      });
+      document.head.append(script);
+    });
+    return qrLibrary;
+  }
+
   function qrCode(text) {
     const code = qrcode(0, 'M');
     code.addData(text, 'Byte');
@@ -283,7 +298,7 @@
   function buyView() {
     const amount = amountInput();
     const error = para('', 'buy-note');
-    const go = primary('Continue', () => begin(amount, null, error, go));
+    const go = primary('Continue', () => begin(amount, null, error));
     show('Get a key', ...field('Amount in USD, 20 to 500', amount), error, actions(go, secondary('Back', close)));
     error.hidden = true;
   }
@@ -292,7 +307,7 @@
     const key = keyInput();
     const amount = amountInput();
     const error = para('', 'buy-note');
-    const go = primary('Continue', () => begin(amount, key, error, go));
+    const go = primary('Continue', () => begin(amount, key, error));
     show(
       'Top up an existing key',
       ...field('Existing key', key),
@@ -309,14 +324,13 @@
     error.hidden = false;
   }
 
-  async function begin(amountField, keyField, error, button) {
+  async function begin(amountField, keyField, error) {
     error.hidden = true;
     const amount = canonicalAmount(amountField.value);
     const key = keyField ? keyField.value.trim() : null;
     if (keyField && !isHeaderSafe(key)) return fail(error, 'Paste the key you want to top up.');
     if (!amount) return fail(error, 'Enter an amount from 20 to 500 USD, with at most two decimals.');
     if (!crypto.subtle) return fail(error, 'This browser cannot prepare the payment here. Open the page over https in a current browser.');
-    button.disabled = true;
     bearer = key;
     if (keyField) keyField.value = '';
     await open({ code: newCode(), topup: Boolean(keyField), amount }, true);
@@ -369,6 +383,9 @@
   // Payment view
 
   async function open(pending, fresh) {
+    const preparing = el('div', { className: 'buy-status', role: 'status' });
+    show('Preparing the payment', preparing);
+    waiting(preparing, 'Checking the gateway.');
     const catalog = pending.amount ? await fetchCatalog() : null;
     if (fresh && !catalog) {
       closedView(async () => {
@@ -378,7 +395,8 @@
     }
     const stored = save(pending);
     const reference = catalog ? await referenceOf(pending.code) : null;
-    payView(pending, catalog, reference, stored);
+    const hasQr = catalog ? await loadQrLibrary() : false;
+    payView(pending, catalog, reference, stored, hasQr);
   }
 
   function resume(pending) {
@@ -409,13 +427,13 @@
     return button;
   }
 
-  function payView(pending, catalog, reference, stored) {
+  function payView(pending, catalog, reference, stored, hasQr) {
     const { code, topup, amount } = pending;
     const pay = el('div', {});
     if (catalog) {
       const url = payUrl(catalog, amount, reference, topup);
       pay.append(
-        qrCode(url),
+        hasQr ? qrCode(url) : para('The QR did not load. Use the wallet link.'),
         actions(el('a', { href: url, className: 'buy-btn buy-primary' }, 'Open in wallet')),
         para('The wallet needs USDC plus a little SOL for the network fee. Exchange withdrawals are not supported: pay from a wallet.'),
       );

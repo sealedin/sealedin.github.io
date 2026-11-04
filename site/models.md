@@ -15,3 +15,5 @@ GLM, Kimi, DeepSeek and Qwen over one attested API. USD per million tokens, inpu
 - Qwen3.8-27B `chutes/Qwen/Qwen3.8-27B-TEE` | 0.041 / 1.31 |
 
 Prices as of 2026-11-03.
+
+[How the GPU attestation is checked](/trust.md)

@@ -15,6 +15,7 @@
 <script src="/assets/site.js" defer></script>
 <script src="/assets/qrcode.js" defer></script>
 <script src="/assets/buy.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SealedIn","url":"https://sealedin.ai/"}</script>
 </head>
 <body>
 <div style="font-family: 'Archivo', sans-serif; color: #1A1714; background: #F4F0E7; overflow-x: hidden">
@@ -31,6 +32,8 @@
       <a href="#buy" style="background: #F3D02B; border: 2px solid #1A1714; padding: 10px 16px; text-decoration: none">Get a key</a>
     </nav>
   </header>
+
+  <main>
 
   <section style="background-color: #C6A26F; background-image: repeating-linear-gradient(0deg, rgba(26,23,20,0.05) 0 1px, transparent 1px 7px); padding: clamp(40px, 6vw, 88px) clamp(16px, 4.4vw, 64px) clamp(40px, 5vw, 72px)">
     <div role="img" aria-label="SealedIn logo: a yellow cable tie threaded through the word" style="display: inline-flex; align-items: center; isolation: isolate; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(64px, 17vw, 240px); line-height: 0.8; max-width: 100%">
@@ -122,9 +125,10 @@ claude</pre>
       <p style="margin: 20px 0 0"><a href="/trust" style="color: #F3D02B">What is verified, and what is not</a></p>
     </div>
   </section>
+  </main>
 
-  <footer style="padding: 24px clamp(16px, 4.4vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">
-    <span style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a href="/models">Models</a><a href="/trust">Trust</a><a href="/terms">Terms</a><a href="/support">Support</a><a href="/llms.txt">llms.txt</a></span>
+  <footer style="padding: 24px clamp(16px, 4.4vw, 64px); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">
+    <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a href="/models" style="display: inline-flex; align-items: center; min-height: 24px">Models</a><a href="/agents" style="display: inline-flex; align-items: center; min-height: 24px">Agents</a><a href="/trust" style="display: inline-flex; align-items: center; min-height: 24px">Trust</a><a href="/terms" style="display: inline-flex; align-items: center; min-height: 24px">Terms</a><a href="/support" style="display: inline-flex; align-items: center; min-height: 24px">Support</a></nav>
   </footer>
   <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
 </div>

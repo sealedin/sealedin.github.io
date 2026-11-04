@@ -1,0 +1,62 @@
+/* The two-checks scheme on the trust page. Exactly one of the two boards is displayed. */
+.scheme { margin: 20px 0 24px; color: #1A1714; }
+.scheme b { display: inline; }
+.sch-label { font: 700 13px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+.sch-dark .sch-label { color: #F3D02B; }
+.sch-name { font: 900 40px/1.1 'Big Shoulders Stencil', sans-serif; text-transform: uppercase; }
+.sch-note { font-size: 14px; line-height: 1.4; }
+.sch-box { box-sizing: border-box; display: flex; align-items: center; background: #F4F0E7; border: 3px solid #1A1714; }
+.sch-dark { background: #1A1714; color: #F4F0E7; border: 0; }
+.sch-tie { position: absolute; }
+.sch-lock { position: absolute; box-sizing: border-box; background: #D9B518; border: 1px solid #1A1714; }
+.sch-num { position: absolute; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #1A1714; color: #F4F0E7; font: 700 15px 'Barlow Condensed', sans-serif; }
+.sch-enc { position: absolute; font: 700 13px/16px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+.sch-arrow { position: absolute; }
+.sch-arrow::after { content: ''; position: absolute; border-style: solid; border-color: transparent; }
+.sch-head { font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Wide: the drawn board without its outer margins, 800 px wide. The column on this page is 820 px at this breakpoint. */
+.sch-wide { display: none; }
+@media (min-width: 860px) {
+  .sch-wide { display: block; }
+  .sch-phone { display: none; }
+}
+.sch-board { position: relative; width: 800px; height: 192px; }
+.sch-wide .sch-tie { left: 90px; top: 62px; width: 560px; height: 12px; background: repeating-linear-gradient(90deg, #F3D02B 0 5px, #D9B518 5px 7px); }
+.sch-wide .sch-box { position: absolute; top: 24px; width: 190px; height: 168px; padding: 18px; }
+.sch-wide .sch-you { left: 0; }
+.sch-wide .sch-gate { left: 305px; }
+.sch-wide .sch-gpu { left: 610px; }
+.sch-wide .sch-back1 { position: absolute; left: 622px; top: 12px; width: 178px; height: 168px; background: #7A5A1E; }
+.sch-wide .sch-back2 { position: absolute; left: 616px; top: 18px; width: 184px; height: 168px; background: #C6A26F; }
+.sch-wide .sch-lock { left: 586px; top: 54px; width: 24px; height: 28px; }
+.sch-wide .sch-arrow { top: 143px; width: 105px; height: 2px; background: repeating-linear-gradient(90deg, #1A1714 0 6px, transparent 6px 12px); }
+.sch-wide .sch-arrow::after { right: -4px; top: -3px; border-width: 4px 0 4px 8px; border-left-color: #1A1714; }
+.sch-wide .sch-a1 { left: 190px; }
+.sch-wide .sch-a2 { left: 495px; }
+.sch-wide .sch-enc { top: 38px; text-align: center; }
+.sch-wide .sch-e1 { left: 192px; width: 110px; }
+.sch-wide .sch-e2 { left: 492px; width: 92px; }
+.sch-wide .sch-n1 { left: 235px; top: 132px; }
+.sch-wide .sch-n2 { left: 540px; top: 132px; }
+.sch-steps { display: grid; grid-template-columns: 380px 380px; gap: 40px; margin-top: 36px; font-size: 15px; line-height: 1.45; }
+
+/* Phone: in flow, so it stays fluid down to a 288 px column. Offsets are the drawn ones, measured from the box edge. */
+.sch-phone { box-sizing: border-box; max-width: 358px; margin: 0 auto; padding: 16px clamp(0px, calc((100% - 318px) / 2), 20px); }
+.sch-col { position: relative; }
+.sch-phone .sch-tie { left: 24px; top: 44px; bottom: 54px; width: 12px; background: repeating-linear-gradient(0deg, #F3D02B 0 5px, #D9B518 5px 7px); }
+.sch-phone .sch-box { position: relative; padding: 12px 16px; }
+.sch-phone .sch-name { font-size: 32px; }
+.sch-phone .sch-you { min-height: 98px; }
+.sch-phone .sch-gate { min-height: 114px; }
+.sch-phone .sch-gpu { min-height: 124px; }
+.sch-stack { position: relative; margin-bottom: 12px; }
+.sch-phone .sch-back1 { position: absolute; inset: 12px 0 -12px 12px; background: #7A5A1E; }
+.sch-phone .sch-back2 { position: absolute; inset: 6px 0 -6px 6px; background: #C6A26F; }
+.sch-row { position: relative; box-sizing: border-box; min-height: 110px; padding: 8px 0 8px 124px; font-size: 14px; line-height: 1.35; }
+.sch-row .sch-head { font-size: 14px; letter-spacing: 0.1em; }
+.sch-phone .sch-arrow { left: 99px; top: 0; bottom: 5px; width: 2px; background: repeating-linear-gradient(180deg, #1A1714 0 6px, transparent 6px 12px); }
+.sch-phone .sch-arrow::after { bottom: -4px; left: -3px; border-width: 8px 4px 0; border-top-color: #1A1714; }
+.sch-phone .sch-num { left: 88px; top: calc(50% - 12px); }
+.sch-phone .sch-enc { left: 46px; top: 50%; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+.sch-phone .sch-lock { left: 16px; bottom: 0; width: 28px; height: 24px; }

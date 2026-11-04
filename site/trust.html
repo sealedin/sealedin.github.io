@@ -18,6 +18,7 @@
 <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/trust-scheme.css">
 <style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
 </head>
 <body>
@@ -32,17 +33,42 @@
 
     <h2 style="margin: 48px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Two checks. One endpoint.</h2>
     <p style="margin: 0">You talk to one endpoint. It is an enclave that checks other enclaves. An enclave is sealed hardware that can prove what code it runs.</p>
-    <div role="img" aria-label="Your client checks the attestation of the gateway enclave. The gateway enclave checks the attestation of each GPU enclave that runs a model." style="margin: 20px 0 24px">
-      <div style="min-width: 0; padding: 16px; border: 2px solid #1A1714; box-sizing: border-box; background: #F4F0E7"><div aria-hidden="true" style="display: flex; align-items: center; height: 18px; margin: 0 0 12px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div><p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">Your client</p><p style="margin: 6px 0 8px; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 26px; line-height: 1.1; text-transform: uppercase">You</p><p style="margin: 0; font-size: 15px; line-height: 1.45">One endpoint, any compatible client.</p></div>
-      <p style="margin: 0; padding: 8px 0; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">&darr; You check: TDX quote and TLS endorsement</p>
-      <div style="min-width: 0; padding: 16px; border: 2px solid #1A1714; box-sizing: border-box; background: #1A1714; color: #F4F0E7"><div aria-hidden="true" style="display: flex; align-items: center; height: 18px; margin: 0 0 12px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div><p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">Intel TDX enclave</p><p style="margin: 6px 0 8px; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 26px; line-height: 1.1; text-transform: uppercase">SealedIn gateway</p><p style="margin: 0; font-size: 15px; line-height: 1.45">TLS ends here. Routes your request.</p></div>
-      <p style="margin: 0; padding: 8px 0; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">&darr; It checks: CPU and GPU attestation, key binding</p>
-      <div style="min-width: 0; padding: 16px; border: 2px solid #1A1714; box-sizing: border-box; background: #F4F0E7"><div aria-hidden="true" style="display: flex; align-items: center; height: 18px; margin: 0 0 12px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div><p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">GPU enclaves</p><p style="margin: 6px 0 8px; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 26px; line-height: 1.1; text-transform: uppercase">Models</p><p style="margin: 0; font-size: 15px; line-height: 1.45">Each instance proves itself before it gets a request.</p></div>
+    <div class="scheme" role="img" aria-label="Your client checks the attestation of the gateway enclave. The gateway enclave checks the attestation of each GPU enclave that runs a model. Your prompt is encrypted on the way and opened only inside those two enclaves.">
+      <div class="sch-wide">
+        <div class="sch-board">
+          <div class="sch-tie"></div>
+          <div class="sch-arrow sch-a1"></div>
+          <div class="sch-arrow sch-a2"></div>
+          <div class="sch-box sch-you"><span><span class="sch-label">Your client</span><br><b class="sch-name">You</b><br><span class="sch-note">Any compatible client</span></span></div>
+          <div class="sch-box sch-dark sch-gate"><span><span class="sch-label">Intel TDX enclave</span><br><b class="sch-name">Gateway</b><br><span class="sch-note">One endpoint. TLS ends here.</span></span></div>
+          <div class="sch-back1"></div>
+          <div class="sch-back2"></div>
+          <div class="sch-box sch-dark sch-gpu"><span><span class="sch-label">GPU enclaves</span><br><b class="sch-name">Models</b><br><span class="sch-note">Your prompt opens here.</span></span></div>
+          <div class="sch-lock"></div>
+          <div class="sch-enc sch-e1">Encrypted</div>
+          <div class="sch-enc sch-e2">Encrypted</div>
+          <div class="sch-num sch-n1">1</div>
+          <div class="sch-num sch-n2">2</div>
+        </div>
+        <div class="sch-steps">
+          <div><b class="sch-head">1. You check the gateway</b><br>TDX quote and TLS endorsement: you are talking to the enclave, not to a proxy in front of it.</div>
+          <div><b class="sch-head">2. The gateway checks each GPU</b><br>CPU and GPU attestation and key binding, before use and every 15 minutes.</div>
+        </div>
+      </div>
+      <div class="sch-phone">
+        <div class="sch-col">
+          <div class="sch-tie"></div>
+          <div class="sch-box sch-you"><span><span class="sch-label">Your client</span><br><b class="sch-name">You</b></span></div>
+          <div class="sch-row"><div class="sch-arrow"></div><div class="sch-num">1</div><div class="sch-enc">Encrypted</div><b class="sch-head">You check the gateway</b><br>TDX quote and TLS endorsement: you are talking to the enclave, not a proxy.</div>
+          <div class="sch-box sch-dark sch-gate"><span><span class="sch-label">Intel TDX enclave</span><br><b class="sch-name">Gateway</b><br><span class="sch-note">One endpoint. TLS ends here.</span></span></div>
+          <div class="sch-row"><div class="sch-arrow"></div><div class="sch-num">2</div><div class="sch-enc">Encrypted</div><div class="sch-lock"></div><b class="sch-head">It checks each GPU</b><br>CPU and GPU attestation and key binding, before use and every 15 minutes.</div>
+          <div class="sch-stack"><div class="sch-back1"></div><div class="sch-back2"></div><div class="sch-box sch-dark sch-gpu"><span><span class="sch-label">GPU enclaves</span><br><b class="sch-name">Models</b><br><span class="sch-note">Your prompt opens here.</span></span></div></div>
+        </div>
+      </div>
     </div>
     <ol style="margin: 0; padding-left: 22px">
       <li style="margin-bottom: 8px"><strong>You check the gateway.</strong> GET /v1/quote returns an Intel-signed TDX quote that binds the enclave's key and measures its code. GET /v1/tls is that key's endorsement of the TLS certificate. Compare it with the certificate you are connected to: TLS ends inside the enclave, not at a proxy in front of it.</li>
-      <li style="margin-bottom: 8px"><strong>The gateway checks the GPUs.</strong> Before it uses a model instance, it verifies the CPU attestation, the GPU attestation and the key binding, then rechecks every 15 minutes and encrypts each request to that instance. This runs inside the code you measured in the first check.</li>
-      <li><strong>Your prompt stays sealed.</strong> It is encrypted on the way and opened only inside those two enclaves.</li>
+      <li><strong>The gateway checks the GPUs.</strong> Before it uses a model instance, it verifies the CPU attestation, the GPU attestation and the key binding, then rechecks every 15 minutes and encrypts each request to that instance. This runs inside the code you measured in the first check. Your prompt is encrypted on the way and opened only inside those two enclaves.</li>
     </ol>
 
     <h2 style="margin: 48px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">What we can see</h2>

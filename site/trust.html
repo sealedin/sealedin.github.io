@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
+<title>Trust · SealedIn</title>
+<meta name="description" content="What we can see, what is verified, what is not verified yet, and how this fails.">
+<link rel="canonical" href="https://sealedin.github.io/trust">
+<link rel="alternate" type="text/markdown" href="/trust.md">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
+</head>
+<body>
+<div style="font-family: 'Archivo', sans-serif; color: #1A1714; background: #F4F0E7; overflow-x: hidden">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; padding: 14px clamp(16px, 4.4vw, 64px); border-bottom: 2px solid #1A1714; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase">
+    <a href="/" style="text-decoration: none; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 30px; letter-spacing: 0">SealedIn</a>
+    <a href="/#buy" style="background: #F3D02B; border: 2px solid #1A1714; padding: 10px 16px; text-decoration: none">Get a key</a>
+  </header>
+  <main style="max-width: 820px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) 16px; font-size: 17px; line-height: 1.55">
+    <h1 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 0.9; text-transform: uppercase">Contents declared.</h1>
+
+    <h2 style="margin: 48px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">What we can see</h2>
+    <p style="margin: 0">Metadata: key, model, token counts, request size and timing. Billing needs it. In normal operation we have no software path to the content of your prompts.</p>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">What is verified</h2>
+    <ul style="margin: 0; padding-left: 22px">
+      <li style="margin-bottom: 8px">TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.</li>
+      <li style="margin-bottom: 8px">The gateway has no administrative route reachable from outside, and its master key is derived inside the enclave.</li>
+      <li style="margin-bottom: 8px">The gateway checks the CPU attestation, the GPU attestation and the key binding of each Chutes instance before using it, rechecks every 15 minutes, and encrypts each request to that instance.</li>
+      <li>Prices come from a catalog signed by the enclave.</li>
+    </ul>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">What is not verified yet</h2>
+    <ul style="margin: 0; padding-left: 22px">
+      <li style="margin-bottom: 8px">The source is not public yet, so a stranger cannot reproduce the measurement. That is the next release.</li>
+      <li>The check of the upstream cannot prove which weights ran, or what the upstream did with the prompt.</li>
+    </ul>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">How this fails</h2>
+    <ul style="margin: 0; padding-left: 22px">
+      <li style="margin-bottom: 8px">Everything above rests on Intel TDX working as specified. It does not protect against someone with physical access to the server and root, as TEE.fail showed in 2025.</li>
+      <li style="margin-bottom: 8px">Your prompt is decrypted inside the upstream's enclave, today always Chutes.</li>
+      <li>Balances are not protected against a host restoring an old disk.</li>
+    </ul>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Out of scope</h2>
+    <p style="margin: 0">Physical attacks on the hardware, side channels and compromise of the hardware vendors.</p>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Who runs this</h2>
+    <p style="margin: 0">Two operators. No company, no data processing agreement, no service level agreement and no invoice.</p>
+  </main>
+  <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
+</div>
+</body>
+</html>

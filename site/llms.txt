@@ -1,0 +1,13 @@
+# SealedIn
+
+> One API endpoint to open-weight models in GPU enclaves on Chutes, through a gateway in an Intel TDX enclave. OpenAI and Anthropic compatible. Keys are bought with USDC on Solana over x402.
+
+## Start
+- [For agents](https://sealedin.github.io/agents.md): endpoints, buying a key, models, rules
+- [Models and prices](https://sealedin.github.io/models.md)
+
+## About
+- [Trust](https://sealedin.github.io/trust.md): what is verified and what is not
+- [Terms](https://sealedin.github.io/terms.md)
+- [Support](https://sealedin.github.io/support.md)
+- [All pages as one file](https://sealedin.github.io/llms-full.txt)

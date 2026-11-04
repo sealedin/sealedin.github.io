@@ -112,13 +112,23 @@ USD per million tokens, input / output. Every model runs on an attested GPU in s
 Prices as of 2026-11-03.
 # Contents declared.
 
+## Two checks. One endpoint.
+
+You talk to one endpoint. It is an enclave that checks other enclaves. An enclave is sealed hardware that can prove what code it runs.
+
+Your client checks the gateway (TDX quote and TLS endorsement). The gateway, in an Intel TDX enclave, checks each GPU enclave that runs a model (CPU and GPU attestation, key binding).
+
+1. You check the gateway. GET /v1/quote returns an Intel-signed TDX quote that binds the enclave's key and measures its code. GET /v1/tls is that key's endorsement of the TLS certificate. Compare it with the certificate you are connected to: TLS ends inside the enclave, not at a proxy in front of it.
+
+2. The gateway checks the GPUs. Before it uses a model instance, it verifies the CPU attestation, the GPU attestation and the key binding, then rechecks every 15 minutes and encrypts each request to that instance. This runs inside the code you measured in the first check.
+
+3. Your prompt stays sealed. It is encrypted on the way and opened only inside those two enclaves.
+
 ## What we can see
 
 Spend and balance per key. That is what billing needs from us. Model, token counts and timing are recorded inside the enclave and no route exposes them, per request or per prompt. Our hosting provider sees your IP address and the size and timing of encrypted traffic. Payments are public on Solana.
 
 ## What is verified
-
-An enclave is sealed hardware that can prove what code it runs. The terms below use that word.
 
 - The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
 

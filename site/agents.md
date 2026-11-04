@@ -1,6 +1,6 @@
 # SealedIn
 
-One API endpoint to open-weight models in GPU enclaves on Chutes, through a gateway in an Intel TDX enclave. OpenAI and Anthropic compatible. Same text as /agents.md.
+An attested API endpoint on top of attested GPUs: open-weight models in GPU enclaves, through a gateway in an Intel TDX enclave. OpenAI and Anthropic compatible. Same text as /agents.md.
 
 ## Endpoints
 
@@ -27,7 +27,7 @@ chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE   0.46 / 1.39
 chutes/Qwen/Qwen3.5-397B-A17B-TEE               0.47 / 3.15
 chutes/Qwen/Qwen3.8-27B-TEE                     0.041 / 1.31
 
-Chutes list price plus 5 percent, as of 2026-11-03.
+Upstream list price plus 5 percent, as of 2026-11-03.
 
 ## Example
 

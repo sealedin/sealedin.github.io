@@ -4,7 +4,7 @@
 
 - You are responsible for your prompts and for the content you generate.
 
-- Chutes' terms apply to you as well, including its indemnity for prompts and content.
+- The terms of the upstream provider, today Chutes, apply to you as well, including its indemnity for prompts and content.
 
 - Deposits are credits for inference on this endpoint and nothing else: they are not refundable, not withdrawable and not transferable. Credits never expire.
 

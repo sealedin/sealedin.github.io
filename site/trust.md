@@ -10,7 +10,7 @@ Metadata: key, model, token counts, request size and timing. Billing needs it. I
 
 - The gateway has no administrative route reachable from outside, and its master key is derived inside the enclave.
 
-- The gateway checks the CPU attestation, the GPU attestation and the key binding of each Chutes instance before using it, rechecks every 15 minutes, and encrypts each request to that instance.
+- The gateway checks the CPU attestation, the GPU attestation and the key binding of each upstream instance before using it, rechecks every 15 minutes, and encrypts each request to that instance.
 
 - Prices come from a catalog signed by the enclave.
 

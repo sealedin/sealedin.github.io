@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
 <title>SealedIn: one endpoint to attested LLMs</title>
-<meta name="description" content="GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client, in GPU enclaves. Paid in USDC. No card, no account.">
+<meta name="description" content="An attested endpoint on attested GPUs: GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.">
 <link rel="canonical" href="https://sealedin.github.io/">
 <link rel="alternate" type="text/markdown" href="/index.md">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -57,7 +57,7 @@
       <div style="flex: 1 1 560px; min-width: 0; max-width: 820px">
         <p style="margin: 0 0 14px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase">Sealed at origin. Opened at destination. Not in between.</p>
         <h1 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(44px, 5vw, 72px); line-height: 0.95; text-transform: uppercase">One endpoint to attested LLMs.</h1>
-        <p style="margin: 18px 0 0; font-size: clamp(17px, 1.5vw, 22px); line-height: 1.5">GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.</p>
+        <p style="margin: 18px 0 0; font-size: clamp(17px, 1.5vw, 22px); line-height: 1.5">An attested endpoint on top of attested GPUs. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase">
           <a href="#buy" style="background: #F3D02B; color: #1A1714; border: 2px solid #1A1714; padding: 15px 30px; text-decoration: none">I'm a human</a>
           <a href="/agents" style="background: #1A1714; color: #F4F0E7; border: 2px solid #1A1714; padding: 15px 30px; text-decoration: none">I'm an agent</a>
@@ -91,7 +91,7 @@
         <div aria-hidden="true" style="display: flex; align-items: center; height: 18px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div>
         <h3 style="margin: 14px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">02 Take the key</h3>
         <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">It appears on this page once the payment confirms, shown once. Anyone holding it can spend your balance.</p>
-        <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.55">Chutes list price plus 5 percent. <a href="/models">Models and prices</a></p>
+        <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.55">Upstream list price plus 5 percent. <a href="/models">Models and prices</a></p>
       </div>
       <div style="min-width: 0">
         <div aria-hidden="true" style="display: flex; align-items: center; height: 18px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div>
@@ -110,7 +110,7 @@ claude</pre>
   <section style="background: #1A1714; color: #F4F0E7; padding: clamp(48px, 6vw, 88px) clamp(16px, 4.4vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 32px 64px; align-items: start">
     <h2 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(48px, 7vw, 120px); line-height: 0.9; text-transform: uppercase">Not to be opened <span style="color: #F3D02B">in transit.</span></h2>
     <div style="font-size: 17px; line-height: 1.55">
-      <p style="margin: 0">Your request is opened inside our gateway's enclave, then inside the model's enclave on Chutes. Chutes is the only upstream today.</p>
+      <p style="margin: 0">Your request is opened inside our gateway's enclave, then inside the enclave of the GPU running the model.</p>
       <p style="margin: 14px 0 0">We see metadata for billing: key, model, token counts, size and timing. Physical attacks on the hardware are out of scope.</p>
       <p style="margin: 20px 0 0"><a href="/trust" style="color: #F3D02B">What is verified, and what is not</a></p>
     </div>

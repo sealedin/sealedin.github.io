@@ -2,7 +2,7 @@ Sealed at origin. Opened at destination. Not in between.
 
 # One endpoint to attested LLMs.
 
-GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
+An attested endpoint on top of attested GPUs. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
 
 [I'm a human](#buy) [I'm an agent](/agents.md) Freight Prepaid USDC · No account Got an agent? Hand it this:
 
@@ -16,7 +16,7 @@ Connect a wallet and pay in USDC on Solana, from 20 to 500 USD. Credits never ex
 
 It appears on this page once the payment confirms, shown once. Anyone holding it can spend your balance.
 
-Chutes list price plus 5 percent. [Models and prices](/models.md)
+Upstream list price plus 5 percent. [Models and prices](/models.md)
 
 ### 03 Run
 
@@ -33,7 +33,7 @@ claude
 
 ## Not to be opened in transit.
 
-Your request is opened inside our gateway's enclave, then inside the model's enclave on Chutes. Chutes is the only upstream today.
+Your request is opened inside our gateway's enclave, then inside the enclave of the GPU running the model.
 
 We see metadata for billing: key, model, token counts, size and timing. Physical attacks on the hardware are out of scope.
 

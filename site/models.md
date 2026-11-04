@@ -1,8 +1,8 @@
 # Five models. List plus 5 percent.
 
-USD per million tokens, input / output. Every model runs in a GPU enclave on Chutes. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
+USD per million tokens, input / output. Every model runs in an attested GPU enclave. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
 
-- Model | Chutes list | SealedIn |
+- Model | Upstream list | SealedIn |
 
 - GLM-5.2 `chutes/zai-org/GLM-5.2-TEE` | 1.25 / 3.95 | 1.31 / 4.15 |
 
@@ -14,4 +14,4 @@ USD per million tokens, input / output. Every model runs in a GPU enclave on Chu
 
 - Qwen3.8-27B `chutes/Qwen/Qwen3.8-27B-TEE` | 0.039 / 1.25 | 0.041 / 1.31 |
 
-Chutes list prices as of 2026-11-03, from [chutes.ai/app](https://chutes.ai/app). Rounded to the cent, to the tenth of a cent for the smallest price. Chutes is the only upstream today.
+Upstream list prices as of 2026-11-03, from [Chutes](https://chutes.ai/app), today the only upstream. Rounded to the cent, to the tenth of a cent for the smallest price.

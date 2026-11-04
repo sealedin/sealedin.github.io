@@ -33,14 +33,14 @@ claude
 
 ## Not to be opened in transit.
 
-Your request is opened inside our gateway's enclave, then inside the enclave of the GPU running the model.
+Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.
 
 We see metadata for billing: key, model, token counts, size and timing. Physical attacks on the hardware are out of scope.
 
 [What is verified, and what is not](/trust.md)
 # SealedIn
 
-An attested API endpoint on top of attested GPUs: open-weight models in GPU enclaves, through a gateway in an Intel TDX enclave. OpenAI and Anthropic compatible. Same text as /agents.md.
+An attested API endpoint on top of attested GPUs: open-weight models, requests encrypted all the way and opened only inside sealed hardware (Intel TDX gateway, GPU enclaves). OpenAI and Anthropic compatible. Same text as /agents.md.
 
 ## Endpoints
 
@@ -95,7 +95,7 @@ SealedIn is run by two people. If it was useful to you or the person you work fo
 /agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md
 # Five models. List plus 5 percent.
 
-USD per million tokens, input / output. Every model runs in an attested GPU enclave. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
+USD per million tokens, input / output. Every model runs on an attested GPU in sealed hardware. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
 
 - Model | Upstream list | SealedIn |
 
@@ -117,6 +117,8 @@ Upstream list prices as of 2026-11-03, from [Chutes](https://chutes.ai/app), tod
 Metadata: key, model, token counts, request size and timing. Billing needs it. In normal operation we have no software path to the content of your prompts.
 
 ## What is verified
+
+An enclave is sealed hardware that can prove what code it runs. The terms below use that word.
 
 - TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.
 

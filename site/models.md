@@ -1,6 +1,6 @@
 # Five models. List plus 5 percent.
 
-USD per million tokens, input / output. Every model runs in an attested GPU enclave. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
+USD per million tokens, input / output. Every model runs on an attested GPU in sealed hardware. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
 
 - Model | Upstream list | SealedIn |
 

@@ -1,6 +1,6 @@
 # SealedIn
 
-> An attested API endpoint on top of attested GPUs: open-weight models in GPU enclaves, through a gateway in an Intel TDX enclave. OpenAI and Anthropic compatible. Keys are bought with USDC on Solana over x402.
+> An attested API endpoint on top of attested GPUs: open-weight models, requests encrypted all the way and opened only inside sealed hardware (Intel TDX gateway, GPU enclaves). OpenAI and Anthropic compatible. Keys are bought with USDC on Solana over x402.
 
 ## Start
 - [For agents](https://sealedin.github.io/agents.md): endpoints, buying a key, models, rules

@@ -33,7 +33,7 @@ claude
 
 ## Not to be opened in transit.
 
-Your request is opened inside our gateway's enclave, then inside the enclave of the GPU running the model.
+Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.
 
 We see metadata for billing: key, model, token counts, size and timing. Physical attacks on the hardware are out of scope.
 

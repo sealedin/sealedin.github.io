@@ -6,6 +6,8 @@ Metadata: key, model, token counts, request size and timing. Billing needs it. I
 
 ## What is verified
 
+An enclave is sealed hardware that can prove what code it runs. The terms below use that word.
+
 - TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.
 
 - The gateway has no administrative route reachable from outside, and its master key is derived inside the enclave.

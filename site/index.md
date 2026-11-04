@@ -10,11 +10,11 @@ An attested endpoint on top of attested GPUs. GLM, Kimi, DeepSeek and Qwen in Cl
 
 ### 01 Pay
 
-Connect a wallet and pay in USDC on Solana, from 20 to 500 USD. Credits never expire. They are not refundable, not withdrawable and not transferable.
+Choose 20 to 500 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.
 
 ### 02 Take the key
 
-It appears on this page once the payment confirms, shown once. Anyone holding it can spend your balance.
+Save the code shown with the payment. The key appears on this page once the payment confirms, shown once. The code recovers it. Anyone holding the code or the key can spend your balance.
 
 [Models and prices](/models.md)
 

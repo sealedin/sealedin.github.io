@@ -10,8 +10,11 @@
 <link rel="alternate" type="text/markdown" href="/index.md">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/buy.css">
 <style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/qrcode.js" defer></script>
+<script src="/assets/buy.js" defer></script>
 </head>
 <body>
 <div style="font-family: 'Archivo', sans-serif; color: #1A1714; background: #F4F0E7; overflow-x: hidden">
@@ -84,13 +87,16 @@
       <div style="min-width: 0">
         <div aria-hidden="true" style="display: flex; align-items: center; height: 18px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div>
         <h3 style="margin: 14px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">01 Pay</h3>
-        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">Connect a wallet and pay in USDC on Solana, from 20 to 500 USD. Credits never expire. They are not refundable, not withdrawable and not transferable.</p>
-        <button type="button" id="buy-key" style="margin-top: 20px; min-height: 52px; padding: 0 26px; background: #F3D02B; color: #1A1714; border: 2px solid #1A1714; font: 700 18px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer">Get a key · USDC</button>
+        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">Choose 20 to 500 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.</p>
+        <div id="buy-start">
+          <button type="button" id="buy-key" disabled style="margin-top: 20px; min-height: 52px; padding: 0 26px; background: #F3D02B; color: #1A1714; border: 2px solid #1A1714; font: 700 18px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer">Get a key · USDC</button>
+          <p class="buy-alt"><button type="button" id="buy-paid" class="buy-link" disabled>I already paid</button><button type="button" id="buy-topup" class="buy-link" disabled>Top up an existing key</button></p>
+        </div>
       </div>
       <div style="min-width: 0">
         <div aria-hidden="true" style="display: flex; align-items: center; height: 18px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div>
         <h3 style="margin: 14px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">02 Take the key</h3>
-        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">It appears on this page once the payment confirms, shown once. Anyone holding it can spend your balance.</p>
+        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">Save the code shown with the payment. The key appears on this page once the payment confirms, shown once. The code recovers it. Anyone holding the code or the key can spend your balance.</p>
         <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.55"><a href="/models">Models and prices</a></p>
       </div>
       <div style="min-width: 0">
@@ -105,6 +111,7 @@ claude</pre>
         </div>
       </div>
     </div>
+    <div id="buy-flow" hidden></div>
   </section>
 
   <section style="background: #1A1714; color: #F4F0E7; padding: clamp(48px, 6vw, 88px) clamp(16px, 4.4vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 32px 64px; align-items: start">

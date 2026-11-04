@@ -1,0 +1,29 @@
+/* Purchase flow on the home page: square corners, one yellow action per view, yellow never as text on the light ground. */
+#buy-flow { margin-top: 44px; padding: clamp(16px, 3vw, 32px); border: 2px solid #1A1714; min-width: 0; }
+#buy-flow[hidden], #buy-flow [hidden], #buy-start[hidden] { display: none !important; }
+#buy-flow:focus, #buy-flow h3:focus { outline: none; }
+#buy-flow h3 { margin: 0; font: 900 32px/1.1 'Big Shoulders Stencil', sans-serif; text-transform: uppercase; }
+#buy-flow p { margin: 14px 0 0; font-size: 17px; line-height: 1.55; max-width: 62ch; }
+#buy-flow label { display: block; margin-top: 20px; font: 700 16px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+#buy-flow input { display: block; width: 100%; max-width: 420px; min-height: 52px; margin-top: 8px; padding: 0 14px; box-sizing: border-box; background: #fff; color: #1A1714; border: 2px solid #1A1714; border-radius: 0; font: 400 16px 'IBM Plex Mono', monospace; }
+.buy-alt { display: flex; flex-wrap: wrap; gap: 0 20px; margin: 12px 0 0; }
+.buy-link { min-height: 44px; padding: 0; background: none; border: 0; color: #1A1714; font: 400 17px 'Archivo', sans-serif; text-decoration: underline; cursor: pointer; }
+.buy-link:hover { color: #7A5A1E; }
+.buy-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px; }
+.buy-btn { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 52px; padding: 0 26px; background: transparent; color: #1A1714; border: 2px solid #1A1714; border-radius: 0; font: 700 18px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+.buy-btn:hover { color: #1A1714; }
+.buy-btn:disabled { color: #7A5A1E; border-color: #7A5A1E; cursor: default; }
+.buy-primary { background: #F3D02B; }
+.buy-pay { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px 40px; margin-top: 20px; }
+.buy-pay > * { min-width: 0; }
+.buy-qr { display: block; width: 100%; max-width: 320px; height: auto; background: #F4F0E7; }
+.buy-note { color: #7A5A1E; }
+.buy-error { margin-top: 20px; padding-left: 14px; border-left: 5px solid #1A1714; }
+.buy-status { margin-top: 20px; }
+.buy-strap { height: 8px; max-width: 420px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px); background-size: 12px 8px; animation: buy-strap 1.2s linear infinite; }
+@keyframes buy-strap { to { background-position: 12px 0; } }
+@media (prefers-reduced-motion: reduce) { .buy-strap { animation: none; } }
+.buy-block { margin-top: 16px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B; }
+.buy-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font: 700 13px 'Barlow Condensed', sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F; }
+.buy-bar button { min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+.buy-block pre { margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere; }

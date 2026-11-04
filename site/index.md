@@ -38,6 +38,8 @@ export ANTHROPIC_MODEL=chutes/zai-org/GLM-5.2-TEE
 claude
 ```
 
+[Claude Code, Cursor and other clients](/claude-code.md)
+
 ## Not to be opened in transit.
 
 Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.

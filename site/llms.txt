@@ -6,6 +6,7 @@
 - [Home](https://sealedin.ai/index.md)
 - [For agents](https://sealedin.ai/agents.md): endpoints, buying a key, models, rules
 - [Models and prices](https://sealedin.ai/models.md)
+- [Claude Code, Cursor and other clients](https://sealedin.ai/claude-code.md)
 
 ## About
 - [Trust](https://sealedin.ai/trust.md): what is verified and what is not

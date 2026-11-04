@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
+<title>GLM, Kimi and DeepSeek in Claude Code · SealedIn</title>
+<meta name="description" content="Point Claude Code, Cursor or any OpenAI client at GLM, Kimi, DeepSeek or Qwen on one attested API: base URL, key settings and exact model ids.">
+<meta property="og:title" content="GLM, Kimi and DeepSeek in Claude Code · SealedIn">
+<meta property="og:description" content="Point Claude Code, Cursor or any OpenAI client at GLM, Kimi, DeepSeek or Qwen on one attested API: base URL, key settings and exact model ids.">
+<meta property="og:url" content="https://sealedin.ai/claude-code">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SealedIn">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://sealedin.ai/claude-code">
+<link rel="alternate" type="text/markdown" href="/claude-code.md">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<div style="font-family: 'Archivo', sans-serif; color: #1A1714; background: #F4F0E7; overflow-x: hidden">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; padding: 14px clamp(16px, 4.4vw, 64px); border-bottom: 2px solid #1A1714; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase">
+    <a href="/" style="text-decoration: none; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 30px; letter-spacing: 0">SealedIn</a>
+    <a href="/#buy" style="background: #F3D02B; border: 2px solid #1A1714; padding: 10px 16px; text-decoration: none">Get a key</a>
+  </header>
+  <main style="max-width: 820px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) 16px; font-size: 17px; line-height: 1.55">
+    <h1 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(48px, 6vw, 72px); line-height: 0.95; text-transform: uppercase">GLM, Kimi and DeepSeek in Claude Code</h1>
+    <p style="margin: 18px 0 0">One base URL and one key. Get the key on the home page, then set it in your client. <a href="/#buy">Get a key</a>.</p>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Claude Code</h2>
+    <p style="margin: 0">Set these variables, using a model id from the list below, then start it.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>Claude Code</span><button type="button" data-copy="claude-code" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="claude-code" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">export ANTHROPIC_BASE_URL=https://api.sealedin.ai
+export ANTHROPIC_AUTH_TOKEN=$SEALEDIN_KEY
+export ANTHROPIC_MODEL=chutes/zai-org/GLM-5.2-TEE
+claude</pre>
+    </div>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Cursor</h2>
+    <p style="margin: 0">Set these in Cursor, using a model id from the list below.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>Cursor</span><button type="button" data-copy="cursor" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="cursor" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">Cursor Settings, Models:
+OpenAI API Key: your SealedIn key
+Override OpenAI Base URL: https://api.sealedin.ai/v1
+Add model: chutes/zai-org/GLM-5.2-TEE</pre>
+    </div>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Any OpenAI client</h2>
+    <p style="margin: 0">Point the client at https://api.sealedin.ai/v1 and use your key as the API key. The same request with curl:</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>OpenAI format</span><button type="button" data-copy="openai" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="openai" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl https://api.sealedin.ai/v1/chat/completions \
+  -H "Authorization: Bearer $SEALEDIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "chutes/zai-org/GLM-5.2-TEE", "messages": [{"role": "user", "content": "Say hello."}]}'</pre>
+    </div>
+
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Model ids</h2>
+    <p style="margin: 0">Use the exact id. Prices are on the <a href="/models">models page</a>. What is verified, and what is not, is on the <a href="/trust">trust page</a>.</p>
+    <ul style="margin: 14px 0 0; padding-left: 22px">
+      <li style="margin-bottom: 8px">GLM-5.2: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">chutes/zai-org/GLM-5.2-TEE</code></li>
+      <li style="margin-bottom: 8px">Kimi-K3: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">chutes/moonshotai/Kimi-K3-TEE</code></li>
+      <li style="margin-bottom: 8px">DeepSeek-V4-Flash: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE</code></li>
+      <li style="margin-bottom: 8px">Qwen3.5-397B: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">chutes/Qwen/Qwen3.5-397B-A17B-TEE</code></li>
+      <li style="margin-bottom: 8px">Qwen3.8-27B: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">chutes/Qwen/Qwen3.8-27B-TEE</code></li>
+    </ul>
+  </main>
+  <footer style="padding: 24px clamp(16px, 4.4vw, 64px); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">
+    <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a href="/models" style="display: inline-flex; align-items: center; min-height: 24px">Models</a><a href="/agents" style="display: inline-flex; align-items: center; min-height: 24px">Agents</a><a href="/trust" style="display: inline-flex; align-items: center; min-height: 24px">Trust</a><a href="/terms" style="display: inline-flex; align-items: center; min-height: 24px">Terms</a><a href="/support" style="display: inline-flex; align-items: center; min-height: 24px">Support</a><a href="/claude-code" style="display: inline-flex; align-items: center; min-height: 24px">Claude Code</a></nav>
+  </footer>
+  <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
+</div>
+</body>
+</html>

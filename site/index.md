@@ -44,6 +44,6 @@ claude
 
 Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.
 
-We see spend per key, not your requests. The source is open, so you can check that.
+We see spend per key, not your requests. [The source is open](https://github.com/sealedin), so you can check that.
 
 [What is verified, and what is not](/trust.md)

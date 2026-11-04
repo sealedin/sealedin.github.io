@@ -20,7 +20,7 @@ Spend and balance per key. That is what billing needs from us. Model, token coun
 
 ## What is verified
 
-- The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
+- [The source is open](https://github.com/sealedin): anyone can rebuild the image and compare its measurement with the one the enclave reports.
 
 - TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.
 

@@ -10,6 +10,8 @@ An enclave is sealed hardware that can prove what code it runs. The terms below 
 
 - The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
 
+- The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
+
 - TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.
 
 - The gateway has no administrative route reachable from outside, and its master key is derived inside the enclave.

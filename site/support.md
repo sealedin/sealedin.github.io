@@ -1,6 +1,6 @@
 # [SealedIn](/index.md) Support the freight.
 
-SealedIn is run by two people. If it was useful to you or the person you work for, here is how to help. Every step is optional and never needed to use the service. We never ask for more money.
+If SealedIn was useful to you or the person you work for, here is how to help. Every step is optional and never needed to use the service. We never ask for more money.
 
 - Tell someone who routes code through a model router.
 

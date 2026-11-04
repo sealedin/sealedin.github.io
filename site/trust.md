@@ -22,18 +22,11 @@ An enclave is sealed hardware that can prove what code it runs. The terms below 
 
 - The check of the upstream cannot prove which weights ran, or what the upstream did with the prompt.
 
-## How this fails
+## Security model
 
-- Everything above rests on Intel TDX working as specified. It does not protect against someone with physical access to the server and root, as TEE.fail showed in 2025.
-
-- Your prompt is decrypted inside the upstream's enclave, today always Chutes.
-
-- Balances are not protected against a host restoring an old disk.
+We rely on TEEs: Intel TDX for the gateway, GPU enclaves for the models. As long as they are not broken, your prompts and responses stay private. They are opened only inside those TEEs. The upstream today is Chutes.
 
 ## Out of scope
 
 Physical attacks on the hardware, side channels and compromise of the hardware vendors.
 
-## Who runs this
-
-Two operators. No company, no data processing agreement, no service level agreement and no invoice.

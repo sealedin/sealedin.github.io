@@ -39,18 +39,11 @@
       <li>The check of the upstream cannot prove which weights ran, or what the upstream did with the prompt.</li>
     </ul>
 
-    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">How this fails</h2>
-    <ul style="margin: 0; padding-left: 22px">
-      <li style="margin-bottom: 8px">Everything above rests on Intel TDX working as specified. It does not protect against someone with physical access to the server and root, as TEE.fail showed in 2025.</li>
-      <li style="margin-bottom: 8px">Your prompt is decrypted inside the upstream's enclave, today always Chutes.</li>
-      <li>Balances are not protected against a host restoring an old disk.</li>
-    </ul>
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Security model</h2>
+    <p style="margin: 0">We rely on TEEs: Intel TDX for the gateway, GPU enclaves for the models. As long as they are not broken, your prompts and responses stay private. They are opened only inside those TEEs. The upstream today is Chutes.</p>
 
     <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Out of scope</h2>
     <p style="margin: 0">Physical attacks on the hardware, side channels and compromise of the hardware vendors.</p>
-
-    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Who runs this</h2>
-    <p style="margin: 0">Two operators. No company, no data processing agreement, no service level agreement and no invoice.</p>
   </main>
   <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
 </div>

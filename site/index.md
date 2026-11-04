@@ -16,7 +16,7 @@ Connect a wallet and pay in USDC on Solana, from 20 to 500 USD. Credits never ex
 
 It appears on this page once the payment confirms, shown once. Anyone holding it can spend your balance.
 
-Upstream list price plus 5 percent. [Models and prices](/models.md)
+[Models and prices](/models.md)
 
 ### 03 Run
 

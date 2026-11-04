@@ -2,7 +2,7 @@ Sealed at origin. Opened at destination. Not in between.
 
 # One endpoint to attested LLMs.
 
-An attested endpoint on top of attested GPUs. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
+A private LLM API: one attested endpoint on top of attested GPUs, OpenAI and Anthropic compatible. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
 
 [I'm a human](#buy) [I'm an agent](/agents.md) Freight Prepaid USDC · No account Got an agent? Hand it this:
 
@@ -95,7 +95,7 @@ If SealedIn was useful to you or the person you work for, here is how to help. E
 /agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md
 # Five models.
 
-USD per million tokens, input / output. Every model runs on an attested GPU in sealed hardware. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
+GLM, Kimi, DeepSeek and Qwen over one attested API. USD per million tokens, input / output. Every model runs on an attested GPU in sealed hardware. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.
 
 - Model | Price |
 
@@ -111,6 +111,8 @@ USD per million tokens, input / output. Every model runs on an attested GPU in s
 
 Prices as of 2026-11-03.
 # Contents declared.
+
+How SealedIn checks attested LLM inference: what we can see, what is verified, and what is not.
 
 ## Two checks. One endpoint.
 

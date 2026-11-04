@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
-<title>Trust · SealedIn</title>
-<meta name="description" content="What we can see, what is verified, what cannot be verified, and the security model.">
+<title>Attested LLM inference: what is verified · SealedIn</title>
+<meta name="description" content="Your client checks the Intel TDX gateway; the gateway checks each GPU enclave. What we can see, what is verified, what is not, and the security model.">
 <link rel="canonical" href="https://sealedin.ai/trust">
 <link rel="alternate" type="text/markdown" href="/trust.md">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -20,6 +20,7 @@
   </header>
   <main style="max-width: 820px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) 16px; font-size: 17px; line-height: 1.55">
     <h1 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 0.9; text-transform: uppercase">Contents declared.</h1>
+    <p style="margin: 18px 0 0">How SealedIn checks attested LLM inference: what we can see, what is verified, and what is not.</p>
 
     <h2 style="margin: 48px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Two checks. One endpoint.</h2>
     <p style="margin: 0">You talk to one endpoint. It is an enclave that checks other enclaves. An enclave is sealed hardware that can prove what code it runs.</p>

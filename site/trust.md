@@ -1,5 +1,7 @@
 # Contents declared.
 
+How SealedIn checks attested LLM inference: what we can see, what is verified, and what is not.
+
 ## Two checks. One endpoint.
 
 You talk to one endpoint. It is an enclave that checks other enclaves. An enclave is sealed hardware that can prove what code it runs.

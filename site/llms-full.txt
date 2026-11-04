@@ -6,7 +6,7 @@ An attested endpoint on top of attested GPUs. GLM, Kimi, DeepSeek and Qwen in Cl
 
 [I'm a human](#buy) [I'm an agent](/agents.md) Freight Prepaid USDC · No account Got an agent? Hand it this:
 
-## `Read https://sealedin.github.io/agents.md and set up SealedIn as the model endpoint.` Three steps. Then it runs.
+## `Read https://sealedin.ai/agents.md and set up SealedIn as the model endpoint.` Three steps. Then it runs.
 
 ### 01 Pay
 

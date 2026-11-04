@@ -35,7 +35,7 @@ claude
 
 Your request is encrypted all the way and opened only inside sealed hardware: first our gateway, then the GPU running the model.
 
-We see spend per key, not your requests. Physical attacks on the hardware are out of scope.
+We see spend per key, not your requests. The source is open, so you can check that.
 
 [What is verified, and what is not](/trust.md)
 # SealedIn
@@ -119,8 +119,6 @@ Spend and balance per key. That is what billing needs from us. Model, token coun
 ## What is verified
 
 An enclave is sealed hardware that can prove what code it runs. The terms below use that word.
-
-- The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
 
 - The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.
 

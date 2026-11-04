@@ -28,7 +28,6 @@
     <p style="margin: 0 0 10px">An enclave is sealed hardware that can prove what code it runs. The terms below use that word.</p>
     <ul style="margin: 0; padding-left: 22px">
       <li style="margin-bottom: 8px">The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.</li>
-      <li style="margin-bottom: 8px">The source is open: anyone can rebuild the image and compare its measurement with the one the enclave reports.</li>
       <li style="margin-bottom: 8px">TLS terminates inside our Intel TDX enclave, and the enclave endorses the certificate.</li>
       <li style="margin-bottom: 8px">The gateway has no administrative route reachable from outside, and its master key is derived inside the enclave.</li>
       <li style="margin-bottom: 8px">The gateway checks the CPU attestation, the GPU attestation and the key binding of each upstream instance before using it, rechecks every 15 minutes, and encrypts each request to that instance.</li>

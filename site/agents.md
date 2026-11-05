@@ -16,7 +16,7 @@ GET  /v1/tls                TLS endorsement
 
 ## Buying a key
 
-POST /v1/keys/buy with {"amount_usd": 20 to 500} answers 402 with an x402 `exact` challenge on Solana: USDC, treasury address, fee payer.
+POST /v1/keys/buy with {"amount_usd": 20 to 100} answers 402 with an x402 `exact` challenge on Solana: USDC, treasury address, fee payer.
 Retry with the signed transaction in PAYMENT-SIGNATURE. The key is in the response after confirmation.
 The same request with an existing key as bearer tops it up.
 This spends the owner's money. Credits are not refundable, not withdrawable and not transferable. Credits never expire.

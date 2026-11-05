@@ -21,7 +21,7 @@ Read https://sealedin.ai/agents.md and set up SealedIn as the model endpoint.
 
 ### 01 Pay
 
-Choose 20 to 500 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.
+Choose 20 to 100 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.
 
 ### 02 Take the key
 

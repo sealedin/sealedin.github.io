@@ -88,7 +88,7 @@
     const value = text.trim();
     if (!/^\d{1,3}(\.\d{1,2})?$/.test(value)) return null;
     const amount = Number(value);
-    return amount >= 20 && amount <= 500 ? String(amount) : null;
+    return amount >= 20 && amount <= 100 ? String(amount) : null;
   }
 
   function payUrl(catalog, amount, reference, topup) {
@@ -299,7 +299,7 @@
     const amount = amountInput();
     const error = para('', 'buy-note');
     const go = primary('Continue', () => begin(amount, null, error));
-    show('Get a key', ...field('Amount in USD, 20 to 500', amount), error, actions(go, secondary('Back', close)));
+    show('Get a key', ...field('Amount in USD, 20 to 100', amount), error, actions(go, secondary('Back', close)));
     error.hidden = true;
   }
 
@@ -312,7 +312,7 @@
       'Top up an existing key',
       ...field('Existing key', key),
       para('Sent only to confirm the top-up. Never stored.', 'buy-note'),
-      ...field('Amount in USD, 20 to 500', amount),
+      ...field('Amount in USD, 20 to 100', amount),
       error,
       actions(go, secondary('Back', close)),
     );
@@ -329,7 +329,7 @@
     const amount = canonicalAmount(amountField.value);
     const key = keyField ? keyField.value.trim() : null;
     if (keyField && !isHeaderSafe(key)) return fail(error, 'Paste the key you want to top up.');
-    if (!amount) return fail(error, 'Enter an amount from 20 to 500 USD, with at most two decimals.');
+    if (!amount) return fail(error, 'Enter an amount from 20 to 100 USD, with at most two decimals.');
     if (!crypto.subtle) return fail(error, 'This browser cannot prepare the payment here. Open the page over https in a current browser.');
     bearer = key;
     if (keyField) keyField.value = '';

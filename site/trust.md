@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 # Contents declared.
 
 How SealedIn checks attested LLM inference: what we can see, what is verified, and what is not.

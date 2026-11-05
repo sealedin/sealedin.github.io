@@ -2,6 +2,8 @@
 
 An attested API endpoint on top of attested GPUs: open-weight models, requests encrypted all the way and opened only inside sealed hardware (Intel TDX gateway, GPU enclaves). OpenAI and Anthropic compatible. Same text as /agents.md.
 
+Beta. Some things may not work as described yet.
+
 ## Endpoints
 
 Base URL: https://api.sealedin.ai

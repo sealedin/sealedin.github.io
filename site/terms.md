@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 # [SealedIn](/index.md) Conditions of carriage.
 
 - The service is provided as-is, during a test, with no uptime target and no warranty of any kind.

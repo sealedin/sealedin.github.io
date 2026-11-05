@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 # GLM, Kimi and DeepSeek in Claude Code
 
 One base URL and one key. Get the key on the home page, then set it in your client. [Get a key](/index.md).

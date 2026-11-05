@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 # [SealedIn](/index.md) Support the freight.
 
 If SealedIn was useful to you or the person you work for, here is how to help. Every step is optional and never needed to use the service. We never ask for more money.

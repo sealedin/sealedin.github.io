@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 # Five models.
 
 GLM, Kimi, DeepSeek and Qwen over one attested API. USD per million tokens, input / output. Every model runs on an attested GPU in sealed hardware. The signed price sheet is at `https://api.sealedin.ai/v1/catalog`.

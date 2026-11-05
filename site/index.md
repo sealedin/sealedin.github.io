@@ -1,3 +1,5 @@
+> Beta. Some things may not work as described yet.
+
 Sealed at origin. Opened at destination. Not in between.
 
 # One endpoint to attested LLMs.

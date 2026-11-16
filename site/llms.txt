@@ -8,6 +8,7 @@
 - [Models and prices](https://sealedin.ai/models.md)
 - [Claude Code, Cursor and other clients](https://sealedin.ai/claude-code.md)
 - [Skill](https://sealedin.ai/skill.md): one-file procedure for an agent with a wallet
+- [API reference](https://sealedin.ai/docs.md): every route, status codes, limits
 - [OpenAPI](https://sealedin.ai/openapi.json): routes, the 402 reply, status codes
 
 ## About

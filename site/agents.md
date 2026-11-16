@@ -54,4 +54,4 @@ If SealedIn was useful to you or the person you work for, here is how to help. E
 - Report what broke: https://github.com/sealedin/sealedin.github.io/issues
 ## Files
 
-/agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md  /skill.md  /openapi.json  /.well-known/x402
+/agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md  /docs.md  /skill.md  /openapi.json  /.well-known/x402

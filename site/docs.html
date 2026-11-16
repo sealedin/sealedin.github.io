@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
+<title>API reference · SealedIn</title>
+<meta name="description" content="Every route of the SealedIn API: attestation, signed catalog, buying a key over x402, OpenAI and Anthropic compatible calls, status codes and limits.">
+<meta property="og:title" content="API reference · SealedIn">
+<meta property="og:description" content="Every route of the SealedIn API: attestation, signed catalog, buying a key over x402, OpenAI and Anthropic compatible calls, status codes and limits.">
+<meta property="og:url" content="https://sealedin.ai/docs">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SealedIn">
+<meta property="og:image" content="https://sealedin.ai/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sealedin.ai/apple-touch-icon.png">
+<link rel="canonical" href="https://sealedin.ai/docs">
+<link rel="alternate" type="text/markdown" href="/docs.md">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<p style="margin: 0; padding: 6px 16px; background: #1A1714; color: #F4F0E7; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center">Beta. Some things may not work as described yet.</p>
+<div style="font-family: 'Archivo', sans-serif; color: #1A1714; background: #F4F0E7; overflow-x: hidden">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; padding: 14px clamp(16px, 4.4vw, 64px); border-bottom: 2px solid #1A1714; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase">
+    <a href="/" style="text-decoration: none; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 30px; letter-spacing: 0">SealedIn</a>
+    <a href="/#buy" style="background: #F3D02B; border: 2px solid #1A1714; padding: 10px 16px; text-decoration: none">Get a key</a>
+  </header>
+  <main style="max-width: 820px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) 16px; font-size: 17px; line-height: 1.55">
+    <h1 style="margin: 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(48px, 6vw, 72px); line-height: 0.95; text-transform: uppercase">API reference</h1>
+    <p style="margin: 18px 0 0">Base URL: https://api.sealedin.ai. The API is OpenAI and Anthropic compatible. The same routes for machines: <a href="/openapi.json">openapi.json</a>. <a href="/#buy">Get a key</a>.</p>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Authentication</h2>
+    <p style="margin: 12px 0 0">Send the key as <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">Authorization: Bearer KEY</code>, or as <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">x-api-key: KEY</code> on the Anthropic route. Checking the gateway, reading the catalog and buying a key need no key. On the two purchase routes a key is optional: with it the payment tops that key up. The key is a secret: never log it or put it in a URL.</p>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Endpoints</h2>
+    <div style="margin-top: 14px; overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 16px">
+      <thead><tr style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A5A1E; text-align: left"><th scope="col" style="padding: 10px 12px 10px 0">Route</th><th scope="col" style="padding: 10px 12px 10px 0">Key</th><th scope="col" style="padding: 10px 12px 10px 0">Purpose</th></tr></thead>
+      <tbody>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/quote</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">no</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Intel-signed TDX quote binding the enclave's key</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/tls</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">no</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The enclave key's endorsement of the TLS certificate</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/catalog</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">no</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Models, prices and payment terms, signed by the enclave key</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/buy</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">optional</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Buy a key, or top one up, over x402</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/recover</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">no</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Get the key of an x402 purchase again</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/claim</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">optional</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Claim the key of a Solana Pay transfer</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/chat/completions</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">yes</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Chat completion in the OpenAI format</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/messages</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">yes</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Message in the Anthropic format</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/models</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">yes</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Model list in the OpenAI format</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap"><code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /key/info</code></td><td style="padding: 10px 12px 10px 0; vertical-align: top">yes</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The calling key's own spend and budget</td></tr>
+      </tbody></table></div>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Check the gateway</h2>
+    <h3 id="get-v1-quote" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/quote</h3>
+    <p style="margin: 12px 0 0">Returns <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">quote</code>, the TDX quote in base64, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">pubkey</code>, the enclave's Ed25519 public key in hex, bound into the quote's report data, and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">event_log</code>, the boot event log behind RTMR3.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-1" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-1" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl https://api.sealedin.ai/v1/quote</pre>
+    </div>
+    <h3 id="get-v1-tls" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/tls</h3>
+    <p style="margin: 12px 0 0">Returns <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">spki_sha256</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">not_after</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">pubkey</code> and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">signature</code>. Compare <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">spki_sha256</code> with the SHA-256 of the public key of the certificate you are connected to. A mismatch means TLS does not end inside the enclave: send no prompt and no payment.</p>
+    <h3 id="get-v1-catalog" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/catalog</h3>
+    <p style="margin: 12px 0 0">Returns <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">models</code>, each with <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">id</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">input_usd_per_mtok</code> and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">output_usd_per_mtok</code>, and the payment terms <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">pay_to</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">asset</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">networks</code> and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">fee_payer</code>. The reply is signed by the same <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">pubkey</code>.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-2" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-2" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl https://api.sealedin.ai/v1/catalog</pre>
+    </div>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Buy a key</h2>
+    <h3 id="post-v1-keys-buy" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/buy</h3>
+    <p style="margin: 12px 0 0">Body: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">{"amount_usd": 20}</code>, from 20 to 100, at most six decimals. Without a payment the reply is 402 with an x402 <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">exact</code> challenge in the <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">PAYMENT-REQUIRED</code> header, base64 JSON. Repeat the request with the signed transaction in the <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">PAYMENT-SIGNATURE</code> header. The gateway pays the network fee. With an existing key as bearer the amount is added to that key and the reply carries no key.</p>
+    <p style="margin: 12px 0 0">The 200 reply holds <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">key</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">alias</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">max_budget_usd</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">rpm_limit</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">models</code> and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">transaction</code>. Credits are USD 1:1 with the USDC paid, not refundable, not withdrawable and not transferable. The transaction layout is in <a href="/skill.md">skill.md</a>.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-3" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-3" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl -i https://api.sealedin.ai/v1/keys/buy \
+  -H "Content-Type: application/json" \
+  -d '{"amount_usd": 20}'</pre>
+    </div>
+    <div style="margin-top: 14px; overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 16px">
+      <thead><tr style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A5A1E; text-align: left"><th scope="col" style="padding: 10px 12px 10px 0">Status</th><th scope="col" style="padding: 10px 12px 10px 0">Meaning</th></tr></thead>
+      <tbody>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">200</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Settled and credited</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">400</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Bad amount, or a malformed payment header or transaction</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">401</td><td style="padding: 10px 12px 10px 0; vertical-align: top">A top-up's bearer is unknown or blocked. Nothing was paid</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">402</td><td style="padding: 10px 12px 10px 0; vertical-align: top">No payment yet, or a refused one. <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">PAYMENT-RESPONSE.errorReason</code> names a refusal; <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">settlement_pending</code> means the transaction left and may still land, so do not pay again</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">409</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The transaction is settled or in flight. No key: recover it</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">413</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The body is too large</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">429</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Too many attempts</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">502</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Settled, but the key could not be issued: recover it</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">503</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Settlement unavailable. Nothing was charged</td></tr>
+      </tbody></table></div>
+    <h3 id="post-v1-keys-recover" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/recover</h3>
+    <p style="margin: 12px 0 0">Body: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">{"transaction", "payer", "timestamp", "signature"}</code>. The wallet signs the bytes <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">sealedin-key-recover-v1</code>, one NUL, the 64 raw bytes of the transaction signature and the timestamp as 8 big-endian bytes. The timestamp must be within two minutes of now and a proof works once. The reply is the same key, or for a top-up the amount credited.</p>
+    <div style="margin-top: 14px; overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 16px">
+      <thead><tr style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A5A1E; text-align: left"><th scope="col" style="padding: 10px 12px 10px 0">Status</th><th scope="col" style="padding: 10px 12px 10px 0">Meaning</th></tr></thead>
+      <tbody>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">200</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The same key, or for a top-up the amount credited</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">400</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Malformed request</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">401</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The proof does not verify</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">404</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The transaction is not on chain at confirmed commitment</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">409</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The recovery could not stand, for example a revoked key</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">429</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Too many attempts</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">503</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The chain cannot be read</td></tr>
+      </tbody></table></div>
+    <h3 id="post-v1-keys-claim" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/keys/claim</h3>
+    <p style="margin: 12px 0 0">For people paying from a wallet by QR or link. Body: <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">{"code": "..."}</code>, the 32-byte code in base58. The transfer carries a reference, the SHA-256 of <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">sealedin-pay-reference-v1</code>, one NUL and the code, as a base58 address. Whoever holds the code can take the key. With an existing key as bearer the payment is a top-up.</p>
+    <div style="margin-top: 14px; overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 16px">
+      <thead><tr style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A5A1E; text-align: left"><th scope="col" style="padding: 10px 12px 10px 0">Status</th><th scope="col" style="padding: 10px 12px 10px 0">Meaning</th></tr></thead>
+      <tbody>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">200</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Paid and credited</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">202</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Nothing found yet: keep polling, see <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">Retry-After</code></td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">400</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Bad code. Final</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">401</td><td style="padding: 10px 12px 10px 0; vertical-align: top">A bad bearer</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">409</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Final. <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">reason</code> is <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">below_minimum</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">revoked</code>, <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">credited_elsewhere</code> or <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">target_gone</code></td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">429</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Keep polling, see <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">Retry-After</code></td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">502</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Keep polling</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">503</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Keep polling, see <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">Retry-After</code></td></tr>
+      </tbody></table></div>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Call a model</h2>
+    <h3 id="post-v1-chat-completions" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/chat/completions</h3>
+    <p style="margin: 12px 0 0">The OpenAI chat format. Use <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">stream: true</code> and allow 10 minutes per call. <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">n</code> above 1 is refused. Fields outside the OpenAI chat format are removed. Model ids and prices are on the <a href="/models">models page</a>.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-4" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-4" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl -N https://api.sealedin.ai/v1/chat/completions \
+  -H "Authorization: Bearer $SEALEDIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "chutes/zai-org/GLM-5.2-TEE", "stream": true, "messages": [{"role": "user", "content": "Say hello."}]}'</pre>
+    </div>
+    <div style="margin-top: 14px; overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 16px">
+      <thead><tr style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7A5A1E; text-align: left"><th scope="col" style="padding: 10px 12px 10px 0">Status</th><th scope="col" style="padding: 10px 12px 10px 0">Meaning</th></tr></thead>
+      <tbody>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">200</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The completion, or a server-sent event stream when <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">stream</code> is true</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">400</td><td style="padding: 10px 12px 10px 0; vertical-align: top">A malformed request, or <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">budget_exceeded</code>: the key cannot cover the worst case of this request. Lower <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">max_tokens</code>, shorten the prompt or top up</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">401</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Missing, unknown or blocked key</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">413</td><td style="padding: 10px 12px 10px 0; vertical-align: top">The body is over 32 MiB</td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">429</td><td style="padding: 10px 12px 10px 0; vertical-align: top">Rate limit, or more than 10 requests running on the key. See <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">Retry-After</code></td></tr>
+        <tr style="border-top: 1px solid #1A1714"><td style="padding: 10px 12px 10px 0; vertical-align: top; white-space: nowrap">503</td><td style="padding: 10px 12px 10px 0; vertical-align: top">No capacity, or no verified upstream instance for the model</td></tr>
+      </tbody></table></div>
+    <h3 id="post-v1-messages" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">POST /v1/messages</h3>
+    <p style="margin: 12px 0 0">The Anthropic format. Send <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">anthropic-version: 2023-06-01</code>. Use <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">stream: true</code> and allow 10 minutes per call. The status codes are those of <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">/v1/chat/completions</code>.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-5" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-5" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl -N https://api.sealedin.ai/v1/messages \
+  -H "x-api-key: $SEALEDIN_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "chutes/zai-org/GLM-5.2-TEE", "max_tokens": 1024, "stream": true, "messages": [{"role": "user", "content": "Say hello."}]}'</pre>
+    </div>
+    <h3 id="get-v1-models" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /v1/models</h3>
+    <p style="margin: 12px 0 0">The models the key may call, in the OpenAI format. 401 for a missing, unknown or blocked key. <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">/v1/catalog</code> gives the same list with prices and needs no key.</p>
+    <h3 id="get-key-info" style="margin: 28px 0 8px; font: 500 18px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">GET /key/info</h3>
+    <p style="margin: 12px 0 0">The calling key's own info, including <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">spend</code> and <code style="font: 400 14px 'IBM Plex Mono', monospace; overflow-wrap: anywhere">max_budget</code> in USD. 401 for an unknown or blocked key.</p>
+    <div style="margin-top: 14px; background: #1A1714; color: #F4F0E7; border-bottom: 5px solid #F3D02B">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid #7A5A1E; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #C6A26F"><span>curl</span><button type="button" data-copy="code-6" disabled style="min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #C6A26F; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer">Copy</button></div>
+      <pre id="code-6" style="margin: 0; padding: 14px; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">curl https://api.sealedin.ai/key/info \
+  -H "Authorization: Bearer $SEALEDIN_KEY"</pre>
+    </div>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Limits</h2>
+    <ul style="margin: 14px 0 0; padding-left: 22px">
+      <li style="margin-bottom: 8px">Allow 10 minutes per call. A model can reason for a minute or more before the first chunk. A client that gives up early may still be charged for the whole reply.</li>
+      <li style="margin-bottom: 8px">A request body is at most 32 MiB.</li>
+      <li style="margin-bottom: 8px">At most 10 requests run on one key at a time.</li>
+      <li style="margin-bottom: 8px">A purchase is 20 to 100 USD.</li>
+    </ul>
+    
+    <h2 style="margin: 40px 0 10px; padding-top: 16px; border-top: 3px solid #1A1714; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">More</h2>
+    <ul style="margin: 14px 0 0; padding-left: 22px">
+      <li style="margin-bottom: 8px"><a href="/claude-code">Claude Code, Cursor and other clients</a></li>
+      <li style="margin-bottom: 8px"><a href="/agents">For agents</a> and the one-file procedure in <a href="/skill.md">skill.md</a></li>
+      <li style="margin-bottom: 8px"><a href="/trust">What is verified, and what is not</a></li>
+      <li style="margin-bottom: 8px"><a href="/support">Support</a></li>
+    </ul>
+  </main>
+  <footer style="padding: 24px clamp(16px, 4.4vw, 64px); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">
+    <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a href="/models" style="display: inline-flex; align-items: center; min-height: 24px">Models</a><a href="/agents" style="display: inline-flex; align-items: center; min-height: 24px">Agents</a><a href="/trust" style="display: inline-flex; align-items: center; min-height: 24px">Trust</a><a href="/terms" style="display: inline-flex; align-items: center; min-height: 24px">Terms</a><a href="/support" style="display: inline-flex; align-items: center; min-height: 24px">Support</a><a href="/claude-code" style="display: inline-flex; align-items: center; min-height: 24px">Claude Code</a><a href="/docs" style="display: inline-flex; align-items: center; min-height: 24px">API</a><a href="https://github.com/sealedin" style="display: inline-flex; align-items: center; min-height: 24px">GitHub</a></nav>
+  </footer>
+  <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
+</div>
+</body>
+</html>

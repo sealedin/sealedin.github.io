@@ -1,0 +1,21 @@
+{
+  "x402Version": 2,
+  "kind": "resource-server",
+  "name": "SealedIn",
+  "description": "Buy a key for an attested LLM API with USDC on Solana. OpenAI and Anthropic compatible, no account.",
+  "resources": [
+    {
+      "url": "https://api.sealedin.ai/v1/keys/buy",
+      "method": "POST",
+      "description": "A virtual key with credits, 20 to 100 USD. Body: {\"amount_usd\": 20}. Scheme exact, USDC on solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp, network fee paid by the gateway."
+    }
+  ],
+  "attestation": {
+    "type": "tee",
+    "scheme": "intel-tdx",
+    "verifier": "https://api.sealedin.ai/v1/quote"
+  },
+  "docs": "https://sealedin.ai/agents.md",
+  "contact": "https://github.com/sealedin/sealedin.github.io/issues",
+  "updated": "2026-11-16T00:00:00Z"
+}

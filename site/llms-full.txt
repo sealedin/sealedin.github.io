@@ -60,7 +60,7 @@ Beta. Some things may not work as described yet.
 Base URL: https://api.sealedin.ai
 POST /v1/chat/completions   OpenAI format   Authorization: Bearer KEY
 POST /v1/messages           Anthropic format   x-api-key: KEY, anthropic-version: 2023-06-01
-GET  /v1/models             model list
+GET  /v1/models             model list, needs a key; /v1/catalog needs none
 GET  /v1/catalog            prices signed by the enclave
 GET  /v1/quote              TDX quote
 GET  /v1/tls                TLS endorsement
@@ -74,11 +74,11 @@ This spends the owner's money. Credits are not refundable, not withdrawable and 
 
 ## Models, USD per 1M tokens, input / output
 
-chutes/zai-org/GLM-5.2-TEE                      1.31 / 4.15
-chutes/moonshotai/Kimi-K3-TEE                   1.94 / 9.98
-chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE   0.46 / 1.39
-chutes/Qwen/Qwen3.5-397B-A17B-TEE               0.47 / 3.15
-chutes/Qwen/Qwen3.8-27B-TEE                     0.041 / 1.31
+chutes/zai-org/GLM-5.2-TEE                      1.25 / 3.95
+chutes/moonshotai/Kimi-K3-TEE                   1.85 / 9.5
+chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE   0.44 / 1.32
+chutes/Qwen/Qwen3.5-397B-A17B-TEE               0.45 / 3
+chutes/Qwen/Qwen3.8-27B-TEE                     0.039 / 1.25
 
 Prices as of 2026-11-03.
 
@@ -105,7 +105,7 @@ If SealedIn was useful to you or the person you work for, here is how to help. E
 - Report what broke: https://github.com/sealedin/sealedin.github.io/issues
 ## Files
 
-/agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md
+/agents.md  /llms.txt  /llms-full.txt  /models.md  /trust.md  /terms.md  /support.md  /skill.md  /openapi.json  /.well-known/x402
 > Beta. Some things may not work as described yet.
 
 # Five models.
@@ -114,11 +114,11 @@ GLM, Kimi, DeepSeek and Qwen over one attested API. USD per million tokens, inpu
 
 | Model | Price |
 |---|---:|
-| GLM-5.2 `chutes/zai-org/GLM-5.2-TEE` | 1.31 / 4.15 |
-| Kimi-K3 `chutes/moonshotai/Kimi-K3-TEE` | 1.94 / 9.98 |
-| DeepSeek-V4-Flash `chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE` | 0.46 / 1.39 |
-| Qwen3.5-397B `chutes/Qwen/Qwen3.5-397B-A17B-TEE` | 0.47 / 3.15 |
-| Qwen3.8-27B `chutes/Qwen/Qwen3.8-27B-TEE` | 0.041 / 1.31 |
+| GLM-5.2 `chutes/zai-org/GLM-5.2-TEE` | 1.25 / 3.95 |
+| Kimi-K3 `chutes/moonshotai/Kimi-K3-TEE` | 1.85 / 9.5 |
+| DeepSeek-V4-Flash `chutes/deepseek-ai/DeepSeek-V4-Flash-0731-TEE` | 0.44 / 1.32 |
+| Qwen3.5-397B `chutes/Qwen/Qwen3.5-397B-A17B-TEE` | 0.45 / 3 |
+| Qwen3.8-27B `chutes/Qwen/Qwen3.8-27B-TEE` | 0.039 / 1.25 |
 
 Prices as of 2026-11-03.
 

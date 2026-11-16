@@ -7,6 +7,8 @@
 - [For agents](https://sealedin.ai/agents.md): endpoints, buying a key, models, rules
 - [Models and prices](https://sealedin.ai/models.md)
 - [Claude Code, Cursor and other clients](https://sealedin.ai/claude-code.md)
+- [Skill](https://sealedin.ai/skill.md): one-file procedure for an agent with a wallet
+- [OpenAPI](https://sealedin.ai/openapi.json): routes, the 402 reply, status codes
 
 ## About
 - [Trust](https://sealedin.ai/trust.md): what is verified and what is not

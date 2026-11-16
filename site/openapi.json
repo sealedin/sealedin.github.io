@@ -1,0 +1,326 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SealedIn API",
+    "version": "2026-11-16",
+    "summary": "One attested endpoint to open-weight LLMs on attested GPUs, OpenAI and Anthropic compatible, paid in USDC on Solana over x402.",
+    "description": "Beta: some things may not work as described yet. Docs for agents: https://sealedin.ai/agents.md. One-file procedure: https://sealedin.ai/skill.md. What is verified and what is not: https://sealedin.ai/trust.md.",
+    "termsOfService": "https://sealedin.ai/terms"
+  },
+  "servers": [{"url": "https://api.sealedin.ai"}],
+  "tags": [
+    {"name": "attestation", "description": "No key needed. Check these before paying or sending a prompt."},
+    {"name": "keys", "description": "Buying, topping up and recovering a key."},
+    {"name": "inference", "description": "Model calls with a key."}
+  ],
+  "paths": {
+    "/v1/quote": {
+      "get": {
+        "operationId": "getQuote",
+        "tags": ["attestation"],
+        "summary": "Intel-signed TDX quote binding the enclave's key",
+        "security": [],
+        "responses": {
+          "200": {"description": "The quote", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Quote"}}}}
+        }
+      }
+    },
+    "/v1/tls": {
+      "get": {
+        "operationId": "getTlsEndorsement",
+        "tags": ["attestation"],
+        "summary": "The enclave key's endorsement of the TLS certificate's public key",
+        "description": "Compare spki_sha256 with the SHA-256 of the public key of the certificate you are connected to.",
+        "security": [],
+        "responses": {
+          "200": {"description": "The endorsement", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/TlsEndorsement"}}}}
+        }
+      }
+    },
+    "/v1/catalog": {
+      "get": {
+        "operationId": "getCatalog",
+        "tags": ["attestation"],
+        "summary": "Models, prices and payment terms, signed by the enclave key",
+        "security": [],
+        "responses": {
+          "200": {"description": "The signed catalog", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Catalog"}}}}
+        }
+      }
+    },
+    "/v1/keys/buy": {
+      "post": {
+        "operationId": "buyKey",
+        "tags": ["keys"],
+        "summary": "Buy a key, or top one up, over x402 exact on Solana",
+        "description": "Without PAYMENT-SIGNATURE the reply is a 402 with the challenge in PAYMENT-REQUIRED. Repeat the request with the signed transaction in PAYMENT-SIGNATURE. With an existing key as bearer the amount is added to that key and the reply carries no key. The gateway pays the network fee. Credits are USD 1:1 with the USDC paid, not refundable, not withdrawable and not transferable.",
+        "security": [{}, {"bearerKey": []}],
+        "parameters": [
+          {"name": "PAYMENT-SIGNATURE", "in": "header", "required": false, "description": "Base64 JSON: {\"x402Version\": 2, \"resource\": {\"url\": ...}, \"accepted\": <the challenge entry>, \"payload\": {\"transaction\": \"<base64 version 0 transaction>\"}}", "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/BuyRequest"}, "example": {"amount_usd": 20}}}
+        },
+        "responses": {
+          "200": {
+            "description": "Settled and credited",
+            "headers": {"PAYMENT-RESPONSE": {"description": "Base64 JSON settlement result", "schema": {"type": "string"}}},
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/KeyReply"}}}
+          },
+          "400": {"description": "Bad amount, or a malformed payment header or transaction"},
+          "401": {"description": "A top-up's bearer is unknown or blocked. Nothing was paid"},
+          "402": {
+            "description": "No payment yet, or a refused one. PAYMENT-RESPONSE.errorReason names a refusal; settlement_pending means the transaction left and may still land, so do not pay again",
+            "headers": {
+              "PAYMENT-REQUIRED": {"description": "Base64 JSON challenge, see PaymentRequired", "schema": {"type": "string"}},
+              "PAYMENT-RESPONSE": {"description": "Base64 JSON, on a refused payment", "schema": {"type": "string"}}
+            }
+          },
+          "409": {"description": "The transaction is settled or in flight. No key: recover it"},
+          "413": {"description": "The body is too large"},
+          "429": {"description": "Too many attempts"},
+          "502": {"description": "Settled, but the key could not be issued: recover it"},
+          "503": {"description": "Settlement unavailable. Nothing was charged"}
+        }
+      }
+    },
+    "/v1/keys/recover": {
+      "post": {
+        "operationId": "recoverKey",
+        "tags": ["keys"],
+        "summary": "Get the key of an x402 purchase again, with a proof from the paying wallet",
+        "description": "The wallet signs the bytes sealedin-key-recover-v1, one NUL, the 64 raw bytes of the transaction signature and the timestamp as 8 big-endian bytes. The timestamp must be within two minutes of now and a proof works once.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/RecoverRequest"}}}
+        },
+        "responses": {
+          "200": {"description": "The same key, or for a top-up the amount credited", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/KeyReply"}}}},
+          "400": {"description": "Malformed request"},
+          "401": {"description": "The proof does not verify"},
+          "404": {"description": "The transaction is not on chain at confirmed commitment"},
+          "409": {"description": "The recovery could not stand, for example a revoked key"},
+          "429": {"description": "Too many attempts"},
+          "503": {"description": "The chain cannot be read"}
+        }
+      }
+    },
+    "/v1/keys/claim": {
+      "post": {
+        "operationId": "claimKey",
+        "tags": ["keys"],
+        "summary": "Claim the key of a Solana Pay transfer",
+        "description": "For people paying from a wallet by QR or link. The transfer carries a reference, the SHA-256 of sealedin-pay-reference-v1, one NUL and a random 32-byte code, as a base58 address. Whoever holds the code can take the key. With an existing key as bearer the payment is a top-up.",
+        "security": [{}, {"bearerKey": []}],
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"type": "object", "required": ["code"], "properties": {"code": {"type": "string", "description": "The 32-byte code, base58"}}}}}
+        },
+        "responses": {
+          "200": {"description": "Paid and credited", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/KeyReply"}}}},
+          "202": {"description": "Nothing found yet: keep polling, see Retry-After"},
+          "400": {"description": "Bad code. Final"},
+          "401": {"description": "A bad bearer"},
+          "409": {"description": "Final. reason is below_minimum, revoked, credited_elsewhere or target_gone"},
+          "429": {"description": "Keep polling, see Retry-After"},
+          "502": {"description": "Keep polling"},
+          "503": {"description": "Keep polling, see Retry-After"}
+        }
+      }
+    },
+    "/key/info": {
+      "get": {
+        "operationId": "getKeyInfo",
+        "tags": ["keys"],
+        "summary": "The calling key's own spend and budget",
+        "security": [{"bearerKey": []}],
+        "responses": {
+          "200": {"description": "Key info, including spend and max_budget in USD", "content": {"application/json": {"schema": {"type": "object"}}}},
+          "401": {"description": "Unknown or blocked key"}
+        }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "operationId": "listModels",
+        "tags": ["inference"],
+        "summary": "Model list in the OpenAI format. Needs a key; /v1/catalog needs none",
+        "security": [{"bearerKey": []}, {"apiKeyHeader": []}],
+        "responses": {
+          "200": {"description": "The models the key may call", "content": {"application/json": {"schema": {"type": "object"}}}},
+          "401": {"description": "Missing, unknown or blocked key"}
+        }
+      }
+    },
+    "/v1/chat/completions": {
+      "post": {
+        "operationId": "createChatCompletion",
+        "tags": ["inference"],
+        "summary": "Chat completion in the OpenAI format",
+        "description": "Use stream: true and allow 10 minutes per call. A client that gives up early may still be charged for the whole reply. n above 1 is refused. Fields outside the OpenAI chat format are removed.",
+        "security": [{"bearerKey": []}],
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ChatRequest"}, "example": {"model": "chutes/zai-org/GLM-5.2-TEE", "stream": true, "messages": [{"role": "user", "content": "Say hello."}]}}}
+        },
+        "responses": {
+          "200": {"description": "The completion, or a server-sent event stream when stream is true"},
+          "400": {"description": "A malformed request, or budget_exceeded: the key cannot cover the worst case of this request. Lower max_tokens, shorten the prompt or top up"},
+          "401": {"description": "Missing, unknown or blocked key"},
+          "413": {"description": "The body is over 32 MiB"},
+          "429": {"description": "Rate limit, or more than 10 requests running on the key. See Retry-After"},
+          "503": {"description": "No capacity, or no verified upstream instance for the model"}
+        }
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "operationId": "createMessage",
+        "tags": ["inference"],
+        "summary": "Message in the Anthropic format",
+        "description": "Send anthropic-version: 2023-06-01. Use stream: true and allow 10 minutes per call.",
+        "security": [{"apiKeyHeader": []}, {"bearerKey": []}],
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/MessagesRequest"}, "example": {"model": "chutes/zai-org/GLM-5.2-TEE", "max_tokens": 1024, "stream": true, "messages": [{"role": "user", "content": "Say hello."}]}}}
+        },
+        "responses": {
+          "200": {"description": "The message, or a server-sent event stream when stream is true"},
+          "400": {"description": "A malformed request, or budget_exceeded"},
+          "401": {"description": "Missing, unknown or blocked key"},
+          "413": {"description": "The body is over 32 MiB"},
+          "429": {"description": "Rate limit, or more than 10 requests running on the key. See Retry-After"},
+          "503": {"description": "No capacity, or no verified upstream instance for the model"}
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerKey": {"type": "http", "scheme": "bearer", "description": "Authorization: Bearer sk-..."},
+      "apiKeyHeader": {"type": "apiKey", "in": "header", "name": "x-api-key"}
+    },
+    "schemas": {
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "quote": {"type": "string", "description": "TDX quote, base64"},
+          "pubkey": {"type": "string", "description": "The enclave's Ed25519 public key, hex, bound into the quote's report data"},
+          "block_id": {"type": "string"},
+          "report_data_version": {"type": "integer"},
+          "event_log": {"type": "string", "description": "Boot event log behind RTMR3"}
+        }
+      },
+      "TlsEndorsement": {
+        "type": "object",
+        "properties": {
+          "spki_sha256": {"type": "string", "description": "SHA-256 of the TLS certificate's public key, hex"},
+          "not_after": {"type": "integer", "description": "Unix seconds"},
+          "pubkey": {"type": "string"},
+          "signature": {"type": "string", "description": "By pubkey, hex"}
+        }
+      },
+      "Catalog": {
+        "type": "object",
+        "properties": {
+          "models": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "The model name to send", "examples": ["chutes/zai-org/GLM-5.2-TEE"]},
+                "input_usd_per_mtok": {"type": "string"},
+                "output_usd_per_mtok": {"type": "string"},
+                "provider": {"type": "string"},
+                "tier": {"type": "string", "examples": ["gpu-tee"]},
+                "upstream_id": {"type": "string"}
+              }
+            }
+          },
+          "markup_percent": {"type": "number"},
+          "list_as_of": {"type": "string"},
+          "list_source": {"type": "string"},
+          "pay_to": {"type": "string", "description": "Treasury wallet, base58"},
+          "asset": {"type": "string", "description": "USDC mint"},
+          "networks": {"type": "array", "items": {"type": "string"}},
+          "fee_payer": {"type": "string"},
+          "issued_at": {"type": "integer"},
+          "pubkey": {"type": "string"},
+          "signature": {"type": "string"}
+        }
+      },
+      "BuyRequest": {
+        "type": "object",
+        "required": ["amount_usd"],
+        "properties": {"amount_usd": {"type": "number", "minimum": 20, "maximum": 100, "description": "At most six decimals"}}
+      },
+      "PaymentRequired": {
+        "type": "object",
+        "description": "The base64-decoded PAYMENT-REQUIRED header",
+        "properties": {
+          "x402Version": {"type": "integer", "const": 2},
+          "error": {"type": "string"},
+          "resource": {"type": "object", "properties": {"url": {"type": "string"}, "description": {"type": "string"}, "mimeType": {"type": "string"}}},
+          "accepts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {"type": "string", "const": "exact"},
+                "network": {"type": "string", "examples": ["solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"]},
+                "amount": {"type": "string", "description": "USDC base units, 6 decimals"},
+                "asset": {"type": "string"},
+                "payTo": {"type": "string"},
+                "maxTimeoutSeconds": {"type": "integer"},
+                "extra": {"type": "object", "properties": {"feePayer": {"type": "string"}, "recentBlockhash": {"type": "string"}, "lastValidBlockHeight": {"type": "string"}}}
+              }
+            }
+          }
+        }
+      },
+      "KeyReply": {
+        "type": "object",
+        "properties": {
+          "key": {"type": "string", "description": "The key. Absent for a top-up"},
+          "alias": {"type": "string"},
+          "max_budget_usd": {"type": "number"},
+          "rpm_limit": {"type": "integer"},
+          "models": {"type": "array", "items": {"type": "string"}},
+          "transaction": {"type": "string", "description": "Solana transaction signature, base58"}
+        }
+      },
+      "RecoverRequest": {
+        "type": "object",
+        "required": ["transaction", "payer", "timestamp", "signature"],
+        "properties": {
+          "transaction": {"type": "string", "description": "Transaction signature, base58"},
+          "payer": {"type": "string", "description": "The paying wallet, base58"},
+          "timestamp": {"type": "integer", "description": "Unix seconds"},
+          "signature": {"type": "string", "description": "Ed25519 signature by the payer, base58"}
+        }
+      },
+      "ChatRequest": {
+        "type": "object",
+        "required": ["model", "messages"],
+        "properties": {
+          "model": {"type": "string"},
+          "messages": {"type": "array", "items": {"type": "object"}},
+          "stream": {"type": "boolean"},
+          "max_tokens": {"type": "integer"}
+        }
+      },
+      "MessagesRequest": {
+        "type": "object",
+        "required": ["model", "messages", "max_tokens"],
+        "properties": {
+          "model": {"type": "string"},
+          "messages": {"type": "array", "items": {"type": "object"}},
+          "max_tokens": {"type": "integer"},
+          "stream": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

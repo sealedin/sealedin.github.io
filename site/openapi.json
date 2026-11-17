@@ -5,7 +5,8 @@
     "version": "2026-11-16",
     "summary": "One attested endpoint to open-weight LLMs on attested GPUs, OpenAI and Anthropic compatible, paid in USDC on Solana over x402.",
     "description": "Beta: some things may not work as described yet. Docs for agents: https://sealedin.ai/agents.md. One-file procedure: https://sealedin.ai/skill.md. What is verified and what is not: https://sealedin.ai/trust.md.",
-    "termsOfService": "https://sealedin.ai/terms"
+    "termsOfService": "https://sealedin.ai/terms",
+    "contact": {"email": "info@sealedin.ai", "url": "https://sealedin.ai/support"}
   },
   "servers": [{"url": "https://api.sealedin.ai"}],
   "tags": [

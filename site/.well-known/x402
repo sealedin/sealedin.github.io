@@ -16,6 +16,6 @@
     "verifier": "https://api.sealedin.ai/v1/quote"
   },
   "docs": "https://sealedin.ai/agents.md",
-  "contact": "https://github.com/sealedin/sealedin.github.io/issues",
+  "contact": "mailto:info@sealedin.ai",
   "updated": "2026-11-16T00:00:00Z"
 }

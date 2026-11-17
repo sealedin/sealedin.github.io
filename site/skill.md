@@ -59,7 +59,7 @@ Allow 10 minutes per call. A model can reason for a minute or more before the fi
 
 ## Report a problem
 
-https://github.com/sealedin/sealedin.github.io/issues. Never include a key or a prompt.
+info@sealedin.ai or https://github.com/sealedin/sealedin.github.io/issues. Never include a key or a prompt.
 
 ## What this does not establish
 

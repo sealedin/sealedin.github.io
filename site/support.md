@@ -12,3 +12,5 @@ If SealedIn was useful to you or the person you work for, here is how to help. E
 
 - Report what broke: https://github.com/sealedin/sealedin.github.io/issues
 
+- Write to us: info@sealedin.ai
+

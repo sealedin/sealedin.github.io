@@ -52,6 +52,7 @@
       "post": {
         "operationId": "buyKey",
         "tags": ["keys"],
+        "x-payment-info": {"protocols": ["x402"], "price": {"mode": "dynamic", "currency": "USD", "min": "20", "max": "100"}},
         "summary": "Buy a key, or top one up, over x402 exact on Solana",
         "description": "Without PAYMENT-SIGNATURE the reply is a 402 with the challenge in PAYMENT-REQUIRED. Repeat the request with the signed transaction in PAYMENT-SIGNATURE. With an existing key as bearer the amount is added to that key and the reply carries no key. The gateway pays the network fee. Credits are USD 1:1 with the USDC paid, not refundable, not withdrawable and not transferable.",
         "security": [{}, {"bearerKey": []}],

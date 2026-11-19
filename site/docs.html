@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Zh+IEXbyJfJ3vLj0fmfLH0Xs+ULX3Z/4B8aMweYSy5w=' https://static.ads-twitter.com https://t.co https://analytics.twitter.com; img-src 'self' https://t.co https://analytics.twitter.com; frame-src https://t.co https://analytics.twitter.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai https://t.co https://analytics.twitter.com">
 <title>API reference · SealedIn</title>
 <meta name="description" content="Every route of the SealedIn API: attestation, signed catalog, buying a key over x402, OpenAI and Anthropic compatible calls, status codes and limits.">
 <meta property="og:title" content="API reference · SealedIn">
@@ -23,6 +23,14 @@
 <link rel="stylesheet" href="/assets/fonts.css">
 <style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
 <script src="/assets/site.js" defer></script>
+<!-- X conversion tracking base code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','rjb1j');
+</script>
+<!-- End X conversion tracking base code -->
 </head>
 <body>
 <p style="margin: 0; padding: 6px 16px; background: #1A1714; color: #F4F0E7; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center">Beta. Some things may not work as described yet.</p>

@@ -84,6 +84,38 @@
     return base58encode(new Uint8Array(await crypto.subtle.digest('SHA-256', input)));
   }
 
+  // Analytics: amounts and item names only. The transaction id is a separate hash of the code, so it matches nothing on-chain.
+
+  const REPORTED = 'sealedin.reported-purchase';
+
+  function track(event, pending, extra = {}) {
+    const item = { item_id: pending.topup ? 'key_topup' : 'api_key', item_name: pending.topup ? 'Key top-up' : 'API key', quantity: 1 };
+    const params = { items: [item], ...extra };
+    if (pending.amount) {
+      item.price = Number(pending.amount);
+      params.currency = 'USD';
+      params.value = Number(pending.amount);
+    }
+    try {
+      window.gtag?.('event', event, params);
+    } catch {
+      // Analytics never gets in the way of a payment.
+    }
+  }
+
+  /** Reports a confirmed payment once per code, also across reloads. */
+  async function trackPurchase(pending) {
+    try {
+      const input = new TextEncoder().encode(`sealedin-ga-transaction-v1 ${pending.code}`);
+      const id = base58encode(new Uint8Array(await crypto.subtle.digest('SHA-256', input))).slice(0, 24);
+      if (localStorage.getItem(REPORTED) === id) return;
+      localStorage.setItem(REPORTED, id);
+      track('purchase', pending, { transaction_id: id });
+    } catch {
+      // Without storage a repeat cannot be ruled out, so nothing is sent.
+    }
+  }
+
   function canonicalAmount(text) {
     const value = text.trim();
     if (!/^\d{1,3}(\.\d{1,2})?$/.test(value)) return null;
@@ -299,6 +331,7 @@
     const amount = amountInput();
     const error = para('', 'buy-note');
     const go = primary('Continue', () => begin(amount, null, error));
+    track('view_item', { topup: false });
     show('Get a key', ...field('Amount in USD, 20 to 100', amount), error, actions(go, secondary('Back', close)));
     error.hidden = true;
   }
@@ -308,6 +341,7 @@
     const amount = amountInput();
     const error = para('', 'buy-note');
     const go = primary('Continue', () => begin(amount, key, error));
+    track('view_item', { topup: true });
     show(
       'Top up an existing key',
       ...field('Existing key', key),
@@ -393,6 +427,7 @@
       });
       return;
     }
+    if (fresh) track('begin_checkout', pending);
     const stored = save(pending);
     const reference = catalog ? await referenceOf(pending.code) : null;
     const hasQr = catalog ? await loadQrLibrary() : false;
@@ -494,7 +529,10 @@
           // Handled below as a reply without a result.
         }
         if (run.stopped) return;
-        if (finish(pending, body)) return;
+        if (finish(pending, body)) {
+          trackPurchase(pending);
+          return;
+        }
         refuse(pending, pay, status, 'The reply cannot be read', 'The gateway confirmed the claim but sent no usable result. Keep your code and try again.');
         return;
       }

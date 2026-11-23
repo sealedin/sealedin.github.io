@@ -1,0 +1,11 @@
+/* Bonus page: the sign-in action and the outcome box, on the dark ground. */
+.bonus-btn { display: inline-flex; align-items: center; box-sizing: border-box; min-height: 52px; padding: 0 26px; background: #F3D02B; color: #1A1714; border: 2px solid #F3D02B; font: 700 18px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+.bonus-btn:hover { color: #1A1714; background: #F4F0E7; border-color: #F4F0E7; }
+.bonus-btn[hidden], .bonus-result[hidden] { display: none; }
+.bonus-result { margin-top: 32px; padding: clamp(16px, 3vw, 32px); max-width: 720px; box-sizing: border-box; border: 2px solid #F3D02B; }
+.bonus-result:focus { outline: none; }
+.bonus-result h2 { margin: 0; font: 900 32px/1.1 'Big Shoulders Stencil', sans-serif; text-transform: uppercase; }
+.bonus-result p { margin: 14px 0 0; }
+.bonus-key { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; padding: 14px; background: #F4F0E7; color: #1A1714; }
+.bonus-key code { flex: 1 1 240px; min-width: 0; font: 400 16px/1.5 'IBM Plex Mono', monospace; overflow-wrap: anywhere; }
+.bonus-key button { min-height: 44px; padding: 0 16px; background: transparent; color: #1A1714; border: 2px solid #1A1714; font: 700 15px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }

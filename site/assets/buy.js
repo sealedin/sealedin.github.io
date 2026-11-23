@@ -87,6 +87,8 @@
   // Analytics: amounts and item names only. The transaction id is a separate hash of the code, so it matches nothing on-chain.
 
   const REPORTED = 'sealedin.reported-purchase';
+  // X conversion events by analytics event name. They carry nothing: no amount, no id.
+  const X_EVENTS = { begin_checkout: 'tw-rjb1j-rjwjl' };
 
   function track(event, pending, extra = {}) {
     const item = { item_id: pending.topup ? 'key_topup' : 'api_key', item_name: pending.topup ? 'Key top-up' : 'API key', quantity: 1 };
@@ -100,6 +102,11 @@
       window.gtag?.('event', event, params);
     } catch {
       // Analytics never gets in the way of a payment.
+    }
+    try {
+      if (X_EVENTS[event]) window.twq?.('event', X_EVENTS[event], {});
+    } catch {
+      // The same holds for the ad pixel.
     }
   }
 

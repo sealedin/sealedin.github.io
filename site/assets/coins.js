@@ -7,7 +7,11 @@
   const REPORTED = 'sealedin.reported-coin-order';
   const SITE_MAX_USD = 100;
   const POLL_SECONDS = 20;
-  const FIRST = ['xmr', 'btc', 'trc20/usdt', 'ltc', 'eth', 'erc20/usdt', 'erc20/usdc', 'bep20/usdt', 'base/usdc', 'sol/usdt', 'ton/usdt'];
+  const FIRST = ['btc', 'xmr', 'zec', 'ltc', 'eth', 'sol/sol', 'ton/gram', 'trx', 'bep20/bnb', 'trc20/usdt', 'erc20/usdt', 'erc20/usdc', 'bep20/usdt', 'base/usdc', 'sol/usdt', 'ton/usdt'];
+  // The picker lists each chain's own coin and the stablecoins. The service takes the forwarder's other tokens too, by its API.
+  const NATIVE = new Set(['btc', 'xmr', 'zec', 'ltc', 'eth', 'trx', 'sol/sol', 'ton/gram', 'bep20/bnb', 'avax-c/avax', 'polygon/pol', 'arbitrum/eth', 'base/eth', 'optimism/eth', 'linea/eth', 'monad/mon', 'bera/bera']);
+  const STABLE = new Set(['usdt', 'usdt0', 'usdc', 'dai', 'pyusd', 'usdg', 'usd1', 'eurc', 'tusd', 'usdd', 'musd']);
+  const listed = (ticker) => NATIVE.has(ticker) || STABLE.has(ticker.split('/')[1]);
   const REQUEST = { credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' };
 
   const panel = document.getElementById('coins-flow');
@@ -145,6 +149,7 @@
     } catch {
       list = null;
     }
+    if (Array.isArray(list?.coins)) list.coins = list.coins.filter((coin) => typeof coin?.ticker === 'string' && listed(coin.ticker));
     if (sealed) {
       sealed.hidden = true;
       list = { ...list, coins: (Array.isArray(list?.coins) ? list.coins : []).filter((coin) => coin.ticker !== 'sol/usdc') };

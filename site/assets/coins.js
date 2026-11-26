@@ -145,7 +145,7 @@
     const coins = list.coins.toSorted((a, b) => rank(a.ticker) - rank(b.ticker) || a.ticker.localeCompare(b.ticker));
     const select = el('select', { id: 'coins-coin' }, ...coins.map((coin) => el('option', { value: coin.ticker }, `${coin.name} (${coin.ticker}), minimum ${coin.minimum}`)));
     const maxUsd = Math.min(Number(list.max_usd) || SITE_MAX_USD, SITE_MAX_USD);
-    const minUsd = Number(list.min_usd) || 20;
+    const minUsd = Number(list.min_usd) || 5;
     const amount = el('input', { id: 'coins-usd', value: String(Math.max(25, minUsd)), inputMode: 'decimal', autocomplete: 'off' });
     const error = el('p', { className: 'coins-error', hidden: !note }, note);
     const go = button('Get the address', async () => {
@@ -168,6 +168,11 @@
       const reply = await request('/pay/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticker, usd }) });
       if (reply.status === 201) order = await reply.json();
       else if (reply.status === 429) words = 'Too many orders right now. Try again in a minute.';
+      else if (reply.status === 400) {
+        // The service says why, for one: the amount is under the smallest payment this coin's forwarder takes.
+        const said = (await reply.json())?.error;
+        if (typeof said === 'string' && said) words = `Not possible: ${said}.`;
+      }
     } catch {
       // The words above hold.
     }

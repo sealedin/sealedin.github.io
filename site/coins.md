@@ -2,7 +2,7 @@
 
 # [SealedIn](/index.md) Any coin aboard.
 
-No USDC on Solana? Buy a key with Bitcoin, Monero, USDT on Tron or another coin from the list. No account. Choose 20 to 100 USD.
+No USDC on Solana? Buy a key with Bitcoin, Monero, USDT on Tron or another coin from the list. No account. Choose 5 to 100 USD; a coin whose own minimum is worth more needs more, and the list shows each minimum.
 
 1. Pick a coin and an amount. You get an address and the amount to send, priced for one hour.
 

@@ -4,12 +4,12 @@ Sealed at origin. Opened at destination. Not in between.
 
 # One endpoint to attested LLMs.
 
-A private LLM API: one attested endpoint on top of attested GPUs, OpenAI and Anthropic compatible. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Paid in USDC. No card, no account.
+A private LLM API: one attested endpoint on top of attested GPUs, OpenAI and Anthropic compatible. GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any compatible client. Pay in USDC, Bitcoin, Monero, USDT or another coin. No card, no account.
 
 - [I'm a human](#three-steps-then-it-runs)
 - [I'm an agent](/agents.md)
 
-Freight prepaid: USDC, no account.
+Freight prepaid: any coin, no account.
 
 Got an agent? Hand it this:
 

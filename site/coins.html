@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Zh+IEXbyJfJ3vLj0fmfLH0Xs+ULX3Z/4B8aMweYSy5w=' https://static.ads-twitter.com https://t.co https://analytics.twitter.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; img-src 'self' https://t.co https://analytics.twitter.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://t.co https://analytics.twitter.com https://td.doubleclick.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai https://pay.sealedin.ai https://t.co https://analytics.twitter.com https://*.analytics.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://google.com https://www.googleadservices.com https://pagead2.googlesyndication.com">
+<title>Pay with Bitcoin, Monero, USDT and other coins | SealedIn</title>
+<meta name="description" content="Buy a SealedIn key with Bitcoin, Monero, USDT on Tron and other coins. No account. The key appears once the payment confirms.">
+<meta property="og:title" content="Pay with Bitcoin, Monero, USDT and other coins">
+<meta property="og:description" content="Buy a SealedIn key with Bitcoin, Monero, USDT on Tron and other coins. No account. The key appears once the payment confirms.">
+<meta property="og:url" content="https://sealedin.ai/coins">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SealedIn">
+<meta property="og:image" content="https://sealedin.ai/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@sealedinai">
+<meta name="twitter:image" content="https://sealedin.ai/apple-touch-icon.png">
+<link rel="canonical" href="https://sealedin.ai/coins">
+<link rel="alternate" type="text/markdown" href="/coins.md">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/coins.css">
+<style>body{margin:0;background:#1A1714}a{color:#F3D02B}a:hover{color:#F4F0E7}</style>
+<!-- X conversion tracking base code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','rjb1j');
+</script>
+<!-- End X conversion tracking base code -->
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JYHPCD3WW9"></script>
+<script src="/assets/ga.js"></script>
+<script src="/assets/coins.js" defer></script>
+</head>
+<body>
+<p style="margin: 0; padding: 6px 16px; background: #1A1714; color: #F4F0E7; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center">Beta. Some things may not work as described yet.</p>
+<div style="font-family: 'Archivo', sans-serif; color: #F4F0E7; background: #1A1714; overflow-x: hidden">
+  <main style="max-width: 980px; margin: 0 auto; padding: clamp(48px, 7vw, 96px) 16px; font-size: 19px; line-height: 1.55">
+    <a href="/" style="font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 30px; text-decoration: none; text-transform: uppercase; color: #F4F0E7">SealedIn</a>
+    <h1 style="margin: 32px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 0.9; text-transform: uppercase">Any coin <span style="color: #F3D02B">aboard.</span></h1>
+    <p style="margin: 28px 0 0; max-width: 720px">No USDC on Solana? Buy a key with Bitcoin, Monero, USDT on Tron or another coin from the list. No account. Choose 5 to 100 USD; a coin whose own minimum is worth more needs more, and the list shows each minimum.</p>
+    <ol style="margin: 28px 0 0; padding-left: 28px; max-width: 720px">
+      <li style="margin-bottom: 10px">Pick a coin and an amount. You get an address and the amount to send, priced for one hour.</li>
+      <li style="margin-bottom: 10px">Send the coin from any wallet or exchange. Send less and the key is smaller, send more and it is larger. A later payment is priced when it arrives.</li>
+      <li>The key appears on this page once the payment confirms. Keep this page in this browser: it holds the secret that reads the key, for 7 days. Use the key like any other: <a href="/claude-code">Claude Code, Cursor and other clients</a>.</li>
+    </ol>
+    <div id="coins-flow" class="coins-flow" tabindex="-1"><p>This page needs JavaScript to ask for an address. Without it, and for agents, the calls are below.</p></div>
+    <p style="margin: 28px 0 0; max-width: 720px">Read before you pay. This route is run by us, the operator, outside the enclave, so we see a key bought here. A key bought with USDC on Solana on <a href="/#buy">the home page</a> is derived inside the enclave and no operator sees it. The coins pass through PayGate.to, a forwarder that sends them on to us and tells us of the payment; we credit what it reports. One order buys one new key and cannot top up a key you have. Pay each address once: a second payment to it is credited by hand, through <a href="/support">support</a>. A payment below the minimum shown for the coin is lost. Credits never expire and are not refundable, not withdrawable and not transferable.</p>
+    <h2 style="margin: 48px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">Without a browser</h2>
+    <p style="margin: 14px 0 0; max-width: 720px">The service is at <code>https://pay.sealedin.ai</code>.</p>
+    <pre style="margin: 16px 0 0; padding: 14px; max-width: 980px; box-sizing: border-box; background: #F4F0E7; color: #1A1714; font: 400 14px/1.7 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere">GET  /pay/coins                      coins on offer, each with the smallest payment that is forwarded, and the USD range
+POST /pay/orders                     {"ticker": "xmr", "usd": 20} -&gt; 201 {order, claim, address, amount, expires_at, status}
+GET  /pay/orders/&lt;order&gt;             Authorization: Bearer &lt;claim&gt; -&gt; {status: "pending"} or {status: "paid", credited_usd, key}</pre>
+    <p style="margin: 14px 0 0; max-width: 720px">Keep <code>claim</code>: it is shown once and is the only way to read the key. Send <code>amount</code> of the coin to <code>address</code>, then ask for the order until <code>status</code> is <code>paid</code>.</p>
+  </main>
+  <footer style="padding: 24px clamp(16px, 4.4vw, 64px); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase">
+    <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px"><a href="/models" style="display: inline-flex; align-items: center; min-height: 24px">Models</a><a href="/agents" style="display: inline-flex; align-items: center; min-height: 24px">Agents</a><a href="/trust" style="display: inline-flex; align-items: center; min-height: 24px">Trust</a><a href="/terms" style="display: inline-flex; align-items: center; min-height: 24px">Terms</a><a href="/support" style="display: inline-flex; align-items: center; min-height: 24px">Support</a><a href="/claude-code" style="display: inline-flex; align-items: center; min-height: 24px">Claude Code</a><a href="/docs" style="display: inline-flex; align-items: center; min-height: 24px">API</a><a href="https://github.com/sealedin" style="display: inline-flex; align-items: center; min-height: 24px">GitHub</a><a href="https://x.com/sealedinai" style="display: inline-flex; align-items: center; min-height: 24px">X</a></nav>
+  </footer>
+  <div aria-hidden="true" style="height: 10px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></div>
+</div>
+</body>
+</html>

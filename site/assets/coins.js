@@ -11,6 +11,13 @@
   const REQUEST = { credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' };
 
   const panel = document.getElementById('coins-flow');
+  if (!panel) return;
+  // On the home page the same picker leads: USDC on Solana is handed to buy.js, which buys inside the enclave.
+  const sealed = document.getElementById('buy-key');
+  const SEALED = 'sealed';
+  const SEALED_RANGE = [20, 100];
+  const HEADING = panel.dataset.heading || 'h2';
+  const QUIET = { preventScroll: Boolean(sealed) };
   let timer = null;
   let qrLibrary = null;
 
@@ -38,7 +45,7 @@
 
   function show(title, ...nodes) {
     clearTimeout(timer);
-    const heading = el('h2', { tabIndex: -1 }, title);
+    const heading = el(HEADING, { tabIndex: -1, className: 'coins-title' }, title);
     panel.replaceChildren(heading, ...nodes);
     return heading;
   }
@@ -138,27 +145,49 @@
     } catch {
       list = null;
     }
-    if (!Array.isArray(list?.coins) || list.coins.length === 0) {
+    if (sealed) {
+      sealed.hidden = true;
+      list = { ...list, coins: (Array.isArray(list?.coins) ? list.coins : []).filter((coin) => coin.ticker !== 'sol/usdc') };
+    } else if (!Array.isArray(list?.coins) || list.coins.length === 0) {
       show('Not open yet', el('p', {}, 'Payments in other coins are not available right now. USDC on Solana works on the home page.'), button('Try again', () => chooseView()));
       return;
     }
     const coins = list.coins.toSorted((a, b) => rank(a.ticker) - rank(b.ticker) || a.ticker.localeCompare(b.ticker));
-    const select = el('select', { id: 'coins-coin' }, ...coins.map((coin) => el('option', { value: coin.ticker }, `${coin.name} (${coin.ticker}), minimum ${coin.minimum}`)));
-    const maxUsd = Math.min(Number(list.max_usd) || SITE_MAX_USD, SITE_MAX_USD);
-    const minUsd = Number(list.min_usd) || 5;
-    const amount = el('input', { id: 'coins-usd', value: String(Math.max(25, minUsd)), inputMode: 'decimal', autocomplete: 'off' });
+    const options = coins.map((coin) => el('option', { value: coin.ticker }, `${coin.name} (${coin.ticker}), minimum ${coin.minimum}`));
+    if (sealed) options.unshift(el('option', { value: SEALED }, 'USDC on Solana, sealed'));
+    const select = el('select', { id: 'coins-coin' }, ...options);
+    const coinRange = [Number(list.min_usd) || 5, Math.min(Number(list.max_usd) || SITE_MAX_USD, SITE_MAX_USD)];
+    const range = () => (select.value === SEALED ? SEALED_RANGE : coinRange);
+    const amount = el('input', { id: 'coins-usd', value: '25', inputMode: 'decimal', autocomplete: 'off' });
+    const amountLabel = el('label', { htmlFor: 'coins-usd' });
+    const about = el('p', { className: 'coins-about', hidden: !sealed });
     const error = el('p', { className: 'coins-error', hidden: !note }, note);
-    const go = button('Get the address', async () => {
+    const go = button('Continue', async () => {
       const usd = Number(amount.value);
+      const [minUsd, maxUsd] = range();
       if (!(usd >= minUsd && usd <= maxUsd)) {
         error.textContent = `Choose ${minUsd} to ${maxUsd} USD.`;
         error.hidden = false;
         return;
       }
+      error.hidden = true;
+      if (select.value === SEALED) {
+        document.dispatchEvent(new CustomEvent('sealedin:buy-usdc', { detail: { amount: amount.value.trim() } }));
+        return;
+      }
       go.disabled = true;
       await orderView(select.value, usd);
     }, true);
-    show('Pick a coin', el('label', { htmlFor: 'coins-coin' }, 'Coin'), select, el('label', { htmlFor: 'coins-usd' }, `Amount in USD, ${minUsd} to ${maxUsd}`), amount, error, el('div', { className: 'coins-actions' }, go));
+    const describe = () => {
+      const [minUsd, maxUsd] = range();
+      amountLabel.textContent = `Amount in USD, ${minUsd} to ${maxUsd}`;
+      go.textContent = select.value === SEALED ? 'Continue' : 'Get the address';
+      if (select.value === SEALED) about.replaceChildren('The key is made inside the enclave: no operator sees it. You pay from a Solana wallet, by QR or wallet link.');
+      else about.replaceChildren('This coin goes through PayGate.to and a service we run outside the enclave, so we see a key bought this way. One order buys one new key. ', el('a', { href: '/coins' }, 'Read before you pay'), '.');
+    };
+    select.addEventListener('change', describe);
+    describe();
+    show('Pick a coin', el('label', { htmlFor: 'coins-coin' }, 'Coin'), select, about, amountLabel, amount, error, el('div', { className: 'coins-actions' }, go));
   }
 
   async function orderView(ticker, usd) {
@@ -237,11 +266,11 @@
       chooseView();
     }));
     if (!order.key) {
-      show('Paid, key not shown', el('p', {}, 'The payment arrived, but there is no key to show: it was too small to credit, or the key is no longer kept here. Write to support with the address you paid.'), again).focus();
+      show('Paid, key not shown', el('p', {}, 'The payment arrived, but there is no key to show: it was too small to credit, or the key is no longer kept here. Write to support with the address you paid.'), again).focus(QUIET);
       return;
     }
     reportOnce(order);
-    show('Your key', el('p', {}, `Paid: ${order.credited_usd} USD of credit. Save the key now. It stays readable from this browser for 7 days, then never again.`), copyBlock('Key', order.key), again).focus();
+    show('Your key', el('p', {}, `Paid: ${order.credited_usd} USD of credit. Save the key now. It stays readable from this browser for 7 days, then never again.`), copyBlock('Key', order.key), again).focus(QUIET);
   }
 
   async function resume(stored) {

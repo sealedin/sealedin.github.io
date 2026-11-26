@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Zh+IEXbyJfJ3vLj0fmfLH0Xs+ULX3Z/4B8aMweYSy5w=' https://static.ads-twitter.com https://t.co https://analytics.twitter.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; img-src 'self' https://t.co https://analytics.twitter.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://t.co https://analytics.twitter.com https://td.doubleclick.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai https://t.co https://analytics.twitter.com https://*.analytics.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://google.com https://www.googleadservices.com https://pagead2.googlesyndication.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Zh+IEXbyJfJ3vLj0fmfLH0Xs+ULX3Z/4B8aMweYSy5w=' https://static.ads-twitter.com https://t.co https://analytics.twitter.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; img-src 'self' https://t.co https://analytics.twitter.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://t.co https://analytics.twitter.com https://td.doubleclick.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sealedin.ai https://pay.sealedin.ai https://t.co https://analytics.twitter.com https://*.analytics.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://google.com https://www.googleadservices.com https://pagead2.googlesyndication.com">
 <title>SealedIn: private LLM API on attested GPUs, paid in USDC</title>
 <meta name="description" content="One attested API endpoint for GLM, Kimi, DeepSeek and Qwen in Claude Code, Cursor or any OpenAI or Anthropic compatible client. USDC on Solana, no account.">
 <meta property="og:title" content="SealedIn: private LLM API on attested GPUs, paid in USDC">
@@ -22,9 +22,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/buy.css">
+<link rel="stylesheet" href="/assets/coins.css">
 <style>body{margin:0;background:#F4F0E7}a{color:#1A1714}a:hover{color:#7A5A1E}</style>
 <script src="/assets/site.js" defer></script>
 <script src="/assets/buy.js" defer></script>
+<script src="/assets/coins.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"SealedIn","url":"https://sealedin.ai/"},{"@type":"Organization","name":"SealedIn","url":"https://sealedin.ai/","logo":"https://sealedin.ai/apple-touch-icon.png","sameAs":["https://github.com/sealedin","https://x.com/sealedinai"]}]}</script>
 <!-- X conversion tracking base code -->
 <script>
@@ -112,11 +114,12 @@ twq('config','rjb1j');
       <div style="min-width: 0">
         <div aria-hidden="true" style="display: flex; align-items: center; height: 18px"><span style="width: 14px; height: 18px; background: #D9B518; border: 1px solid #1A1714; box-sizing: border-box"></span><span style="flex: 1; height: 8px; background: repeating-linear-gradient(90deg, #F3D02B 0 4px, #D9B518 4px 6px)"></span></div>
         <h3 style="margin: 14px 0 0; font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; font-size: 32px; line-height: 1.1; text-transform: uppercase">01 Pay</h3>
-        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">Choose 20 to 100 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.</p>
+        <p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55">Pick a coin and an amount. USDC on Solana is the sealed route: 20 to 100 USD, and the key is made inside the enclave, where no operator sees it. Any other coin, Bitcoin, Monero and USDT among them, starts at 5 USD and goes through PayGate.to and a service we run outside the enclave, so we see a key bought that way: <a href="/coins" style="color: #1A1714; font-weight: 700">read before you pay</a>. Credits never expire. They are not refundable, not withdrawable and not transferable.</p>
         <div id="buy-start">
+          <div id="coins-flow" class="coins-flow coins-light" data-heading="h4" tabindex="-1"></div>
           <button type="button" id="buy-key" disabled style="margin-top: 20px; min-height: 52px; padding: 0 26px; background: #F3D02B; color: #1A1714; border: 2px solid #1A1714; font: 700 18px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer">Get a key · USDC</button>
           <p class="buy-alt"><button type="button" id="buy-paid" class="buy-link" disabled>I already paid</button><button type="button" id="buy-topup" class="buy-link" disabled>Top up an existing key</button></p>
-          <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.55">No USDC yet? <a href="/bonus" style="color: #1A1714; font-weight: 700">Follow us on X and get 10 USD of credit</a>. Or <a href="/coins" style="color: #1A1714; font-weight: 700">pay with Bitcoin, Monero, USDT or another coin</a>.</p>
+          <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.55">No coins yet? <a href="/bonus" style="color: #1A1714; font-weight: 700">Follow us on X and get 10 USD of credit</a>.</p>
         </div>
       </div>
       <div style="min-width: 0">

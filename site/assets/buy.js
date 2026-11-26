@@ -334,13 +334,17 @@
     return el('input', { name: 'secret', type: 'password' });
   }
 
-  function buyView() {
+  // With an amount already chosen in the coin picker, the form is shown filled in and continues by itself when it is valid.
+  function buyView(prefill) {
     const amount = amountInput();
+    const chosen = typeof prefill === 'string' ? prefill : null;
+    if (chosen !== null) amount.value = chosen;
     const error = para('', 'buy-note');
     const go = primary('Continue', () => begin(amount, null, error));
     track('view_item', { topup: false });
     show('Get a key', ...field('Amount in USD, 20 to 100', amount), error, actions(go, secondary('Back', close)));
     error.hidden = true;
+    if (chosen !== null && canonicalAmount(chosen)) go.click();
   }
 
   function topupView() {
@@ -667,7 +671,8 @@
 
   // Wiring
 
-  buy.addEventListener('click', buyView);
+  buy.addEventListener('click', () => buyView());
+  document.addEventListener('sealedin:buy-usdc', (event) => buyView(String(event.detail?.amount ?? '')));
   buy.disabled = false;
   for (const [id, view] of [
     ['buy-paid', paidView],

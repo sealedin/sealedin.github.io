@@ -1,8 +1,8 @@
 /* Coins page: the order panel on the dark ground. */
 .coins-flow { margin-top: 32px; padding: clamp(16px, 3vw, 32px); max-width: 720px; box-sizing: border-box; border: 2px solid #F3D02B; }
-.coins-flow:focus, .coins-flow h2:focus { outline: none; }
+.coins-flow:focus, .coins-title:focus { outline: none; }
 .coins-flow [hidden] { display: none !important; }
-.coins-flow h2 { margin: 0; font: 900 32px/1.1 'Big Shoulders Stencil', sans-serif; text-transform: uppercase; }
+.coins-title { margin: 0; font: 900 32px/1.1 'Big Shoulders Stencil', sans-serif; text-transform: uppercase; }
 .coins-flow p { margin: 14px 0 0; }
 .coins-flow label { display: block; margin-top: 20px; font: 700 16px 'Barlow Condensed', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
 .coins-flow select, .coins-flow input { display: block; width: 100%; max-width: 420px; min-height: 52px; margin-top: 8px; padding: 0 14px; box-sizing: border-box; background: #F4F0E7; color: #1A1714; border: 2px solid #F4F0E7; border-radius: 0; font: 400 16px 'IBM Plex Mono', monospace; }
@@ -16,3 +16,10 @@
 .coins-bar button { min-height: 44px; padding: 0 8px; background: transparent; border: 0; color: #1A1714; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
 .coins-block pre { margin: 0; padding: 14px; font: 400 15px/1.6 'IBM Plex Mono', monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
 .coins-qr { display: block; width: 100%; max-width: 280px; height: auto; margin-top: 16px; background: #F4F0E7; }
+/* The same panel on the home page's light ground, inside the first step. */
+.coins-light { margin-top: 20px; padding: 0; border: 0; }
+.coins-light .coins-title { font-size: 24px; }
+.coins-light select, .coins-light input { border-color: #1A1714; }
+.coins-light .coins-btn { color: #1A1714; border-color: #1A1714; }
+.coins-light .coins-block, .coins-light .coins-qr { border: 2px solid #1A1714; box-sizing: border-box; }
+.coins-about a { color: inherit; font-weight: 700; }

@@ -21,9 +21,9 @@ Read https://sealedin.ai/agents.md and set up SealedIn as the model endpoint.
 
 ### 01 Pay
 
-Choose 20 to 100 USD and pay in USDC on Solana from a wallet: scan the QR or open the wallet link. Credits never expire. They are not refundable, not withdrawable and not transferable.
+Pick a coin and an amount. USDC on Solana is the sealed route: 20 to 100 USD, and the key is made inside the enclave, where no operator sees it. Any other coin, Bitcoin, Monero and USDT among them, starts at 5 USD and goes through PayGate.to and a service we run outside the enclave, so we see a key bought that way: [read before you pay](/coins.md). Credits never expire. They are not refundable, not withdrawable and not transferable.
 
-No USDC yet? [Follow us on X and get 10 USD of credit](/bonus.md). Or [pay with Bitcoin, Monero, USDT or another coin](/coins.md).
+No coins yet? [Follow us on X and get 10 USD of credit](/bonus.md).
 
 ### 02 Take the key
 
